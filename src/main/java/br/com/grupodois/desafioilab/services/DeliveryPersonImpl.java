@@ -1,41 +1,28 @@
 package br.com.grupodois.desafioilab.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.grupodois.desafioilab.dao.DeliveryPersonDAO;
+import org.springframework.stereotype.Component;
+
 import br.com.grupodois.desafioilab.dto.DeliveryPersonLoginDTO;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.security.SystemCrypto;
 import br.com.grupodois.desafioilab.security.Token;
 import br.com.grupodois.desafioilab.security.TokenUtil;
 
+@Component
 public class DeliveryPersonImpl implements IDeliveryPerson {
-	
-	@Autowired
-	private DeliveryPersonDAO dao;
-	
+
 	@Override
-	public Token generateUserToken(DeliveryPersonLoginDTO dadosLogin) {	
+	public Token generateUserToken(DeliveryPersonLoginDTO loginData, DeliveryPerson user) throws Exception {	
 		try {
-			System.out.println(dadosLogin);
-			//get email or get phone!! 
-			DeliveryPerson user = dao.findByEmailOrPhone(dadosLogin.getEmail(), dadosLogin.getPhone());
 			
-			if (user == null) { 
-				return null;
+			String encryptedPassword =  SystemCrypto.encrypt(loginData.getPassword());
+			
+			if (!user.getDpPassword().equals(encryptedPassword)) { 
+				throw new Exception("Senha incorreta e tal");
 			}
 			
-			String senhaCriptograda = SystemCrypto.encrypt(dadosLogin.getPassword());
-			
-			System.out.println(user.getDpPassword());
-			System.out.println(senhaCriptograda);
-			
-			if (!user.getDpPassword().equals(senhaCriptograda)) { 
-				return null; 
-			}
-			
-			Token t = new Token(TokenUtil.createToken(user));
-			return t;
+			return new Token(TokenUtil.createToken(user));
 			
 		} catch (Exception e) {
 			e.printStackTrace(System.out);

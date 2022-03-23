@@ -21,14 +21,16 @@ public class DeliveryPerson {
 	@Column(name = "dp_cpf", length = 11, nullable = false, unique = true)
 	private String dpCpf; 
 	
-	@Column(name= "dp_email", length = 50, nullable = false, unique = true)
+	@Column(name= "dp_email", length = 100, nullable = false, unique = true)
 	private String dpEmail; 
 	
-	@Column(name= "dp_password", length = 50, nullable = false)
+	@Column(name= "dp_password", length = 100, nullable = false)
 	private String dpPassword; 
 	
 	@Column(name = "dp_phone", length = 11, nullable = false, unique = true)
 	private String dpPhone;
+	
+	public DeliveryPerson() {}
 
 	public Long getId() {
 		return id;
@@ -77,5 +79,13 @@ public class DeliveryPerson {
 	public void setDpPhone(String dpPhone) {
 		this.dpPhone = dpPhone;
 	}
+
+	@Override
+	public String toString() {
+		return "DeliveryPerson [id=" + id + ", dpName=" + dpName + ", dpCpf=" + dpCpf + ", dpEmail=" + dpEmail
+				+ ", dpPassword=" + dpPassword + ", dpPhone=" + dpPhone + "]";
+	}
+	
+	
 
 }

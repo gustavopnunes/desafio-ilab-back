@@ -9,8 +9,8 @@ public class SystemCrypto {
 
 	
 	public static String encrypt(String original) throws Exception {
-		String strMinhaChave = "123456789 123456789 123456789 12"; 
-		Key key = new SecretKeySpec(strMinhaChave.getBytes(), "AES");
+		String strKey = "123456789 abcdefghi"; 
+		Key key = new SecretKeySpec(strKey.getBytes(), "AES");
 		
 		Cipher cipher = Cipher.getInstance("AES");
 		
@@ -18,8 +18,6 @@ public class SystemCrypto {
 		
 		cipher.update(original.getBytes());
 		
-		String originalCripto = new String(cipher.doFinal(), "UTF-8");
-		
-		return originalCripto;
+		return new String(cipher.doFinal(), "UTF-8");
 	}
 }

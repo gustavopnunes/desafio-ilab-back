@@ -16,9 +16,7 @@ public class SystemAuthFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		
-		System.out.println("Requisicao Passando pelo filtro...");
-		
+
 		if (request.getHeader("Authorization")  != null) { 
 			Authentication auth = TokenUtil.validate(request); 
 			SecurityContextHolder.getContext().setAuthentication(auth);

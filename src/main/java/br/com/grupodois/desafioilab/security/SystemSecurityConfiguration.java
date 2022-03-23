@@ -16,7 +16,6 @@ public class SystemSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private SystemEntryPoint entryPoint; 
 	
 	public void configure(HttpSecurity httpSec) throws Exception{
-		System.out.println("--> SETUP da configuração de segurança...");
 		
 		httpSec.csrf().disable()
 					  .exceptionHandling().authenticationEntryPoint(entryPoint).and()
@@ -24,7 +23,8 @@ public class SystemSecurityConfiguration extends WebSecurityConfigurerAdapter {
 					  .antMatchers(HttpMethod.POST,"/login").permitAll()
 					  .antMatchers(HttpMethod.POST,"/register").permitAll()
 					  
-					  .anyRequest().authenticated().and().cors();
+					  .anyRequest().permitAll(); //Tirar isso aqui no final!
+					 // .anyRequest().authenticated().and().cors();
 		
 			httpSec.addFilterBefore(new SystemAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 			

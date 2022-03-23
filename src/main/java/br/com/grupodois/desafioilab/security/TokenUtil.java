@@ -28,13 +28,13 @@ public class TokenUtil {
 	
 	public static String createToken(DeliveryPerson user) { 
 		Key secretKey = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+		
 		String token = Jwts.builder().setSubject(user.getDpEmail())
 									 .setIssuer(EMISSOR) 
 									 .setExpiration(new Date(System.currentTimeMillis()+EXPIRATION))
 									 .signWith(secretKey, SignatureAlgorithm.HS256)
 								     .compact();
-		System.out.println("TOKEN gerado = "+token);
-		
+	
 		return PREFIX + token;
 	}
 	
