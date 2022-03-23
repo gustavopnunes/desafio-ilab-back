@@ -35,6 +35,7 @@ public class Orders {
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
+	@JsonIgnoreProperties("ordersList")
 	private Client clientId;
 
 	@OneToMany(mappedBy = "dpId")
@@ -42,6 +43,10 @@ public class Orders {
 	private List<TrackingStatus> trackingStatusList;
 	
 	public Orders() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> b39baaaf4e28b82051615d9086853b345409950f
 	}
 
 	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Client clientId) {
