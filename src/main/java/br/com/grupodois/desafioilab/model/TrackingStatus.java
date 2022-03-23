@@ -1,5 +1,7 @@
 package br.com.grupodois.desafioilab.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,6 +33,10 @@ public class TrackingStatus {
 	@JoinColumn(name = "dp_id", nullable = false)
 	@JsonIgnoreProperties("trackingStatusList")
 	private DeliveryPerson dpId;
+	
+	@OneToMany(mappedBy = "tsId")
+	@JsonIgnoreProperties("tsId")
+	private List<TrackingHistory> trackingHistoryList;
 	
 	@Column(name = "ts_status", nullable = false)
 	private TrackingStatusEnum tsStatus;
@@ -59,11 +66,11 @@ public class TrackingStatus {
 		this.orderId = orderId;
 	}
 
-	public DeliveryPerson getdpId() {
+	public DeliveryPerson getDpId() {
 		return dpId;
 	}
 
-	public void setdpId(DeliveryPerson dpId) {
+	public void setDpId(DeliveryPerson dpId) {
 		this.dpId = dpId;
 	}
 
@@ -74,4 +81,13 @@ public class TrackingStatus {
 	public void setTsStatus(TrackingStatusEnum tsStatus) {
 		this.tsStatus = tsStatus;
 	}
+
+	public List<TrackingHistory> getTrackingHistoryList() {
+		return trackingHistoryList;
+	}
+
+	public void setTrackingHistoryList(List<TrackingHistory> trackingHistoryList) {
+		this.trackingHistoryList = trackingHistoryList;
+	}
+	
 }
