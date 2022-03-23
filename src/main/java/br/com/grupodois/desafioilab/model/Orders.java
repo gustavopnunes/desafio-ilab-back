@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "orders")
 public class Orders {
@@ -31,10 +33,11 @@ public class Orders {
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
+	@JsonIgnoreProperties("ordersList")
 	private Client clientId;
 
 	public Orders() {
-		super();
+
 	}
 
 	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Client clientId) {

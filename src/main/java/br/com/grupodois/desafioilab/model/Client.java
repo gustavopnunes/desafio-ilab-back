@@ -1,11 +1,16 @@
 package br.com.grupodois.desafioilab.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "client")
@@ -23,6 +28,23 @@ public class Client {
 	
 	@Column(name = "client_address", columnDefinition = "TEXT", nullable = false)
 	private String clientAddress;
+	
+	@OneToMany(mappedBy = "clientId")
+	@JsonIgnoreProperties("clientId")
+	private List<Orders> ordersList;
+	
+    public Client() {
+    	
+    }
+
+	public Client(Long id, String clientName, String clientCpf, String clientAddress, List<Orders> ordersList) {
+		super();
+		this.id = id;
+		this.clientName = clientName;
+		this.clientCpf = clientCpf;
+		this.clientAddress = clientAddress;
+		this.ordersList = ordersList;
+	}
 
 	public Long getId() {
 		return id;
@@ -55,6 +77,15 @@ public class Client {
 	public void setClientAddress(String clientAddress) {
 		this.clientAddress = clientAddress;
 	}
+
+	public List<Orders> getOrdersList() {
+		return ordersList;
+	}
+
+	public void setOrdersList(List<Orders> ordersList) {
+		this.ordersList = ordersList;
+	}
+	
 	
 	
 }
