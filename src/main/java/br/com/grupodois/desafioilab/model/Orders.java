@@ -1,6 +1,7 @@
 package br.com.grupodois.desafioilab.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,8 +38,11 @@ public class Orders {
 	@JsonIgnoreProperties("ordersList")
 	private Client clientId;
 
+	@OneToMany(mappedBy = "dpId")
+	@JsonIgnoreProperties("dpId")
+	private List<TrackingStatus> trackingStatusList;
+	
 	public Orders() {
-
 	}
 
 	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Client clientId) {
@@ -89,5 +94,12 @@ public class Orders {
 		this.clientId = clientId;
 	}
 
+	public List<TrackingStatus> getTrackingStatusList() {
+		return trackingStatusList;
+	}
+
+	public void setTrackingStatusList(List<TrackingStatus> trackingStatusList) {
+		this.trackingStatusList = trackingStatusList;
+	}
 
 }
