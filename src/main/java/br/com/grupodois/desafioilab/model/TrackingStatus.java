@@ -21,22 +21,22 @@ public class TrackingStatus {
 
 	@ManyToOne
 	@JoinColumn(name = "order_id", nullable = false)
-	private Orders order;
+	private Orders orderId;
 	
 	@ManyToOne
 	@JoinColumn(name = "dp_id", nullable = false)
 	private DeliveryPerson dpPerson;
 	
 	@Column(name = "ts_status", nullable = false)
-	private TrackingStatusEnum status;
+	private TrackingStatusEnum tsStatus;
 
 	public TrackingStatus() {}
 
-	public TrackingStatus(Long id, Orders order, DeliveryPerson dpPerson, TrackingStatusEnum status) {
+	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpPerson, TrackingStatusEnum tsStatus) {
 		this.id = id;
-		this.order = order;
+		this.orderId = orderId;
 		this.dpPerson = dpPerson;
-		this.status = status;
+		this.tsStatus = tsStatus;
 	}
 
 	public Long getId() {
@@ -47,12 +47,12 @@ public class TrackingStatus {
 		this.id = id;
 	}
 
-	public Orders getOrder() {
-		return order;
+	public Orders getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder(Orders order) {
-		this.order = order;
+	public void setOrderId(Orders orderId) {
+		this.orderId = orderId;
 	}
 
 	public DeliveryPerson getDpPerson() {
@@ -63,11 +63,11 @@ public class TrackingStatus {
 		this.dpPerson = dpPerson;
 	}
 
-	public TrackingStatusEnum getStatus() {
-		return status;
+	public TrackingStatusEnum getTsStatus() {
+		return tsStatus;
 	}
 
-	public void setStatus(TrackingStatusEnum status) {
-		this.status = status;
+	public void setTsStatus(TrackingStatusEnum tsStatus) {
+		this.tsStatus = tsStatus;
 	}
 }
