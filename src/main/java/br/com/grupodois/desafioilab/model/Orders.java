@@ -93,5 +93,12 @@ public class Orders {
 		this.clientId = clientId;
 	}
 
+	public List<TrackingStatus> getTrackingStatusList() {
+		return trackingStatusList;
+	}
+
+	public void setTrackingStatusList(List<TrackingStatus> trackingStatusList) {
+		this.trackingStatusList = trackingStatusList;
+	}
 
 }
