@@ -1,0 +1,8 @@
+package br.com.grupodois.desafioilab.services;
+
+import br.com.grupodois.desafioilab.dto.DeliveryPersonLoginDTO;
+import br.com.grupodois.desafioilab.security.Token;
+
+public interface IDeliveryPerson {
+	public Token generateUserToken(DeliveryPersonLoginDTO dadosLogin);
+}
