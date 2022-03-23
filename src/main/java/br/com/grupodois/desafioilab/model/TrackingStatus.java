@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
 
 @Entity
@@ -21,21 +23,23 @@ public class TrackingStatus {
 
 	@ManyToOne
 	@JoinColumn(name = "order_id", nullable = false)
+	@JsonIgnoreProperties("trackingStatusList")
 	private Orders orderId;
 	
 	@ManyToOne
 	@JoinColumn(name = "dp_id", nullable = false)
-	private DeliveryPerson dpPerson;
+	@JsonIgnoreProperties("trackingStatusList")
+	private DeliveryPerson dpId;
 	
 	@Column(name = "ts_status", nullable = false)
 	private TrackingStatusEnum tsStatus;
 
 	public TrackingStatus() {}
 
-	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpPerson, TrackingStatusEnum tsStatus) {
+	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpId, TrackingStatusEnum tsStatus) {
 		this.id = id;
 		this.orderId = orderId;
-		this.dpPerson = dpPerson;
+		this.dpId = dpId;
 		this.tsStatus = tsStatus;
 	}
 
@@ -55,12 +59,12 @@ public class TrackingStatus {
 		this.orderId = orderId;
 	}
 
-	public DeliveryPerson getDpPerson() {
-		return dpPerson;
+	public DeliveryPerson getdpId() {
+		return dpId;
 	}
 
-	public void setDpPerson(DeliveryPerson dpPerson) {
-		this.dpPerson = dpPerson;
+	public void setdpId(DeliveryPerson dpId) {
+		this.dpId = dpId;
 	}
 
 	public TrackingStatusEnum getTsStatus() {

@@ -1,11 +1,16 @@
 package br.com.grupodois.desafioilab.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "delivery_person")
@@ -29,6 +34,23 @@ public class DeliveryPerson {
 	
 	@Column(name = "dp_phone", length = 11, nullable = false, unique = true)
 	private String dpPhone;
+
+	@OneToMany(mappedBy = "dpId")
+	@JsonIgnoreProperties("dpId")
+	private List<TrackingStatus> trackingStatusList;
+	
+	public DeliveryPerson() {
+	}
+
+	public DeliveryPerson(Long id, String dpName, String dpCpf, String dpEmail, String dpPassword, String dpPhone) {
+		super();
+		this.id = id;
+		this.dpName = dpName;
+		this.dpCpf = dpCpf;
+		this.dpEmail = dpEmail;
+		this.dpPassword = dpPassword;
+		this.dpPhone = dpPhone;
+	}
 
 	public Long getId() {
 		return id;
@@ -78,4 +100,11 @@ public class DeliveryPerson {
 		this.dpPhone = dpPhone;
 	}
 
+	public List<TrackingStatus> getTrackingStatusList() {
+		return trackingStatusList;
+	}
+
+	public void setTrackingStatusList(List<TrackingStatus> trackingStatusList) {
+		this.trackingStatusList = trackingStatusList;
+	}
 }
