@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.type.EnumType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -39,6 +42,7 @@ public class TrackingStatus {
 	private List<TrackingHistory> trackingHistoryList;
 	
 	@Column(name = "ts_status", nullable = false)
+	@Enumerated(javax.persistence.EnumType.STRING)
 	private TrackingStatusEnum tsStatus;
 
 	public TrackingStatus() {}
