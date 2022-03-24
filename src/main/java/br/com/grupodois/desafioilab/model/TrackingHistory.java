@@ -1,6 +1,8 @@
 package br.com.grupodois.desafioilab.model;
 
-import java.security.Timestamp;
+
+
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,17 +37,49 @@ public class TrackingHistory {
 	@JsonIgnoreProperties("trackingHistoryList")
 	private TrackingStatus tsId;
 
-	public TrackingHistory() {
+	public TrackingHistory() {}
+
+	public Long getId() {
+		return id;
 	}
 
-	public TrackingHistory(Long id, Timestamp thDate, String thLatitude, String thLongitude, TrackingStatus tsId) {
-		super();
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Timestamp getThDate() {
+		return thDate;
+	}
+
+	public void setThDate(Timestamp thDate) {
 		this.thDate = thDate;
+	}
+
+	public String getThLatitude() {
+		return thLatitude;
+	}
+
+	public void setThLatitude(String thLatitude) {
 		this.thLatitude = thLatitude;
+	}
+
+	public String getThLongitude() {
+		return thLongitude;
+	}
+
+	public void setThLongitude(String thLongitude) {
 		this.thLongitude = thLongitude;
+	}
+
+	public TrackingStatus getTsId() {
+		return tsId;
+	}
+
+	public void setTsId(TrackingStatus tsId) {
 		this.tsId = tsId;
 	}
+	
+	
 
 	
 }

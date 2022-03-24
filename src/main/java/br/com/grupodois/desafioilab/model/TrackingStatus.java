@@ -29,7 +29,7 @@ public class TrackingStatus {
 	@ManyToOne
 	@JoinColumn(name = "order_id", nullable = false)
 	@JsonIgnoreProperties("trackingStatusList")
-	private Orders orderId;
+	private Orders order;
 	
 	@ManyToOne
 	@JoinColumn(name = "dp_id", nullable = false)
@@ -46,12 +46,11 @@ public class TrackingStatus {
 
 	public TrackingStatus() {}
 
-	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpId, List<TrackingHistory> trackingHistoryList,
-			TrackingStatusEnum status) {
+	public TrackingStatus(Long id, Long orderId, DeliveryPerson dpId, TrackingStatusEnum status) {
 		this.id = id;
-		this.orderId = orderId;
+		this.order = new Orders();
+		this.order.setId(orderId);
 		this.dpId = dpId;
-		this.trackingHistoryList = trackingHistoryList;
 		this.status = status;
 	}
 
@@ -63,12 +62,12 @@ public class TrackingStatus {
 		this.id = id;
 	}
 
-	public Orders getOrderId() {
-		return orderId;
+	public Orders getOrder() {
+		return order;
 	}
 
-	public void setOrderId(Orders orderId) {
-		this.orderId = orderId;
+	public void setOrder(Orders orderId) {
+		this.order = orderId;
 	}
 
 	public DeliveryPerson getDpId() {

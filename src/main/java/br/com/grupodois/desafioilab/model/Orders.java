@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -39,7 +40,7 @@ public class Orders {
 	private Client clientId;
 
 	@OneToMany(mappedBy = "dpId")
-	@JsonIgnoreProperties("dpId")
+	@JsonIgnore
 	private List<TrackingStatus> trackingStatusList;
 	
 	public Orders() {
