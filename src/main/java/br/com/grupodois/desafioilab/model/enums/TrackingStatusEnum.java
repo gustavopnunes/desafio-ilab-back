@@ -22,6 +22,6 @@ public enum TrackingStatusEnum {
 			}
 		}
 		
-		throw new IllegalArgumentException("Código de status de ratreio inválido.");
+		throw new IllegalArgumentException("Código de status de rastreio inválido.");
 	}
 }
