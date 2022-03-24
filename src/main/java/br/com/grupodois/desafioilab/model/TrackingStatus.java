@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,16 +40,19 @@ public class TrackingStatus {
 	@JsonIgnoreProperties("tsId")
 	private List<TrackingHistory> trackingHistoryList;
 	
-	@Column(name = "ts_status", nullable = false)
-	private TrackingStatusEnum tsStatus;
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TrackingStatusEnum status;
 
 	public TrackingStatus() {}
 
-	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpId, TrackingStatusEnum tsStatus) {
+	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpId, List<TrackingHistory> trackingHistoryList,
+			TrackingStatusEnum status) {
 		this.id = id;
 		this.orderId = orderId;
 		this.dpId = dpId;
-		this.tsStatus = tsStatus;
+		this.trackingHistoryList = trackingHistoryList;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -74,12 +79,12 @@ public class TrackingStatus {
 		this.dpId = dpId;
 	}
 
-	public TrackingStatusEnum getTsStatus() {
-		return tsStatus;
+	public TrackingStatusEnum getStatus() {
+		return status;
 	}
 
-	public void setTsStatus(TrackingStatusEnum tsStatus) {
-		this.tsStatus = tsStatus;
+	public void setStatus(TrackingStatusEnum status) {
+		this.status = status;
 	}
 
 	public List<TrackingHistory> getTrackingHistoryList() {
@@ -89,5 +94,4 @@ public class TrackingStatus {
 	public void setTrackingHistoryList(List<TrackingHistory> trackingHistoryList) {
 		this.trackingHistoryList = trackingHistoryList;
 	}
-	
 }
