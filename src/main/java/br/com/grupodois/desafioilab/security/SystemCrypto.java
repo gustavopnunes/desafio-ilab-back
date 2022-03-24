@@ -9,7 +9,7 @@ public class SystemCrypto {
 
 	
 	public static String encrypt(String original) throws Exception {
-		String strKey = "123456789 abcdefghi"; 
+		String strKey = "123456789 123456789 123456789 12"; 
 		Key key = new SecretKeySpec(strKey.getBytes(), "AES");
 		
 		Cipher cipher = Cipher.getInstance("AES");

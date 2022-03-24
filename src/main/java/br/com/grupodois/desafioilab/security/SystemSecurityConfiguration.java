@@ -24,7 +24,7 @@ public class SystemSecurityConfiguration extends WebSecurityConfigurerAdapter {
 					  .antMatchers(HttpMethod.POST,"/register").permitAll()
 					  
 					  .anyRequest().permitAll(); //Tirar isso aqui no final!
-					 // .anyRequest().authenticated().and().cors();
+					  //.anyRequest().authenticated().and().cors();
 		
 			httpSec.addFilterBefore(new SystemAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 			

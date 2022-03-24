@@ -18,11 +18,14 @@ public class SystemAuthFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 
 		if (request.getHeader("Authorization")  != null) { 
-			Authentication auth = TokenUtil.validate(request); 
-			SecurityContextHolder.getContext().setAuthentication(auth);
+			Authentication auth;
+			try {
+				auth = TokenUtil.validate(request);
+				SecurityContextHolder.getContext().setAuthentication(auth);
+			} catch (Exception e) {
+				System.err.println("In catch Exception: "+e.getClass());
+			} 
 		}
-		
-		
 		filterChain.doFilter(request, response);		
 	}
 		
