@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.type.EnumType;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
@@ -30,7 +28,7 @@ public class TrackingStatus {
 	@ManyToOne
 	@JoinColumn(name = "order_id", nullable = false)
 	@JsonIgnoreProperties("trackingStatusList")
-	private Orders orderId;
+	private Orders order;
 	
 	@ManyToOne
 	@JoinColumn(name = "dp_id", nullable = false)
@@ -41,15 +39,16 @@ public class TrackingStatus {
 	@JsonIgnoreProperties("tsId")
 	private List<TrackingHistory> trackingHistoryList;
 	
-	@Column(name = "ts_status", nullable = false)
+	@Column(name = "status", nullable = false)
 	@Enumerated(javax.persistence.EnumType.STRING)
 	private TrackingStatusEnum tsStatus;
 
 	public TrackingStatus() {}
 
-	public TrackingStatus(Long id, Orders orderId, DeliveryPerson dpId, TrackingStatusEnum tsStatus) {
+	public TrackingStatus(Long id, Long orderId, DeliveryPerson dpId, TrackingStatusEnum tsStatus) {
 		this.id = id;
-		this.orderId = orderId;
+		this.order = new Orders();
+		this.order.setId(orderId);
 		this.dpId = dpId;
 		this.tsStatus = tsStatus;
 	}
@@ -62,12 +61,12 @@ public class TrackingStatus {
 		this.id = id;
 	}
 
-	public Orders getOrderId() {
-		return orderId;
+	public Orders getOrder() {
+		return order;
 	}
 
-	public void setOrderId(Orders orderId) {
-		this.orderId = orderId;
+	public void setOrder(Orders orderId) {
+		this.order = orderId;
 	}
 
 	public DeliveryPerson getDpId() {

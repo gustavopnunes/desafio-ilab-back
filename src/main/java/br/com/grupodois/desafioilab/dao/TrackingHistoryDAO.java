@@ -10,7 +10,7 @@ import br.com.grupodois.desafioilab.model.TrackingHistory;
 
 public interface TrackingHistoryDAO extends JpaRepository<TrackingHistory, Long>{
 	
-	@Query("SELECT th FROM TrackingHistory th JOIN TrackingStatus ts JOIN Orders o WHERE o.id = :id")
+	@Query("SELECT th FROM TrackingHistory th JOIN TrackingStatus ts ON ts.id = th.tsId WHERE ts.order.id = :id")
 	public List<TrackingHistory> listTrackingHistoryByOrder(@Param("id") Long id);
 		
 
