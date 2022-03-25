@@ -22,5 +22,13 @@ public class OrdersImpl implements IOrdersService {
 		return dao.findAllByOrderStatus(status, firstPage);
 	}
 
-	
+	@Override
+	public Orders getOrderById(Long id) {
+		try {
+			return dao.findById(id).get();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
 }
