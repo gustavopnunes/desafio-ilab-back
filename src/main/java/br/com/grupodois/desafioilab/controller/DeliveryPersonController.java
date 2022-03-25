@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.grupodois.desafioilab.dao.DeliveryPersonDAO;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.security.SystemCrypto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
+@Api(value = "Entregador")
 public class DeliveryPersonController {
+	
 	@Autowired
 	DeliveryPersonDAO dao; 
-	
+
+	@ApiOperation(value = "Cadastro do Entregador")
 	@PostMapping("/register")
 	public ResponseEntity<String> cadastrar(@RequestBody DeliveryPerson newUser) throws Exception { 
 		try { 
