@@ -18,6 +18,11 @@ public class TrackingHistoryImpl implements ITrackingHistoryService{
 	public List<TrackingHistory> listTrackingHistoryByOrder(Long id) {
 		return dao.listTrackingHistoryByOrder(id);
 	}
+
+	@Override
+	public TrackingHistory createTrackingRecord(TrackingHistory newRecording) {
+		return dao.save(newRecording);
+	}
 	
 
 

@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.grupodois.desafioilab.dao.TrackingHistoryDAO;
 import br.com.grupodois.desafioilab.model.TrackingHistory;
 import br.com.grupodois.desafioilab.service.ITrackingHistoryService;
 
@@ -23,9 +25,19 @@ public class TrackingHistoryController {
 	private ITrackingHistoryService service;
 	
 	@PostMapping
-	public String hello(){
-	
-		return "Hello";
+	 public ResponseEntity<?> createNewTrackingRecord(@RequestBody TrackingHistory newRecording) {
+		try {
+			newRecording = service.createTrackingRecord(newRecording);
+			
+			if (newRecording != null) {
+				return ResponseEntity.status(201).body(newRecording);
+			}
+			
+			return ResponseEntity.status(404).body("Dados inválidos.");
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(500).body(ex.getMessage());
+		}
 	}
 	
 	@GetMapping("orders/{id}")
