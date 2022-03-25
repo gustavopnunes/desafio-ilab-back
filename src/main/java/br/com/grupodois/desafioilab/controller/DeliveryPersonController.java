@@ -2,6 +2,7 @@ package br.com.grupodois.desafioilab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.security.SystemCrypto;
 
 @RestController
+@CrossOrigin("*")
 public class DeliveryPersonController {
 	@Autowired
 	DeliveryPersonDAO dao; 
