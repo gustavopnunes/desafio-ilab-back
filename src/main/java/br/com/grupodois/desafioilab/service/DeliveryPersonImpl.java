@@ -1,4 +1,4 @@
-package br.com.grupodois.desafioilab.services;
+package br.com.grupodois.desafioilab.service;
 
 
 import org.springframework.stereotype.Component;

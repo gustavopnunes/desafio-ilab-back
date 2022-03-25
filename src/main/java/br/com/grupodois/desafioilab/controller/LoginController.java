@@ -10,7 +10,7 @@ import br.com.grupodois.desafioilab.dao.DeliveryPersonDAO;
 import br.com.grupodois.desafioilab.dto.DeliveryPersonLoginDTO;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.security.Token;
-import br.com.grupodois.desafioilab.services.IDeliveryPerson;
+import br.com.grupodois.desafioilab.service.IDeliveryPerson;
 
 @RestController
 public class LoginController {
