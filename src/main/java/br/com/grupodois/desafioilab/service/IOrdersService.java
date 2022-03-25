@@ -9,4 +9,5 @@ import br.com.grupodois.desafioilab.model.Orders;
 public interface IOrdersService {
 	public List<Orders> getOrderByStatus(@RequestParam(name = "status") String status, @RequestParam(name = "items") int items);
 	Orders getOrderById(Long id);
+	Orders updateOrder(Orders order);
 }

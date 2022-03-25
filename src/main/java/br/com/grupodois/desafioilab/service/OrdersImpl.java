@@ -31,4 +31,15 @@ public class OrdersImpl implements IOrdersService {
 		}
 		return null;
 	}
+
+	@Override
+	public Orders updateOrder(Orders order) {
+		try {			
+			order.setOrderStatus("Em andamento");
+			return dao.save(order);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
 }
