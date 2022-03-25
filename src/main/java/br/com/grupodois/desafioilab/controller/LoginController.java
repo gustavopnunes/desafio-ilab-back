@@ -24,14 +24,25 @@ public class LoginController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody DeliveryPersonLoginDTO loginData) throws Exception { 
 		try { 
-			DeliveryPerson user = dao.findByDpEmailOrDpPhone(loginData.getEmail(), loginData.getPhone());
-	
+			if ((loginData.getEmail() == null && loginData.getPhone() == null) || loginData.getPassword() == null) { 
+				throw new IllegalArgumentException("Campos telefone/email e senha sao obrigatorios");
+			}
+			String email = loginData.getEmail() != null ? loginData.getEmail().toLowerCase() : null; 
+			
+			DeliveryPerson user = dao.findByDpEmailOrDpPhone(email, loginData.getPhone());
+			
+			if (user == null) {
+				throw new IllegalArgumentException("Login e/ou senha incorretos"); 			 	
+			}
 			Token token = service.generateUserToken(loginData, user);
 			return ResponseEntity.ok(token);
 				
+		} catch (IllegalArgumentException e) { 
+			System.out.print(e.getStackTrace());
+			return ResponseEntity.status(400).body(e.getMessage());
 		} catch (Exception e) { 
-			e.printStackTrace(System.out);
-			return null;
+			System.out.print(e.getStackTrace());
+			return ResponseEntity.status(400).body("Nao foi possivel autenticar usuario");
 		}
 	}
 }

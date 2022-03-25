@@ -19,14 +19,18 @@ public class DeliveryPersonImpl implements IDeliveryPerson {
 			String encryptedPassword =  SystemCrypto.encrypt(loginData.getPassword());
 			
 			if (!user.getDpPassword().equals(encryptedPassword)) { 
-				throw new Exception("Senha incorreta e tal");
+				throw new IllegalArgumentException("Login e/ou senha incorretos");
 			}
 			
-			return new Token(TokenUtil.createToken(user));
+			Token token = new Token(TokenUtil.createToken(user));
+			return token;
 			
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace(System.out);
+			throw new IllegalArgumentException(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
-			return null;
+			throw new Exception("Nao foi possivel autenticar");
 		}
 	}
 
