@@ -33,9 +33,9 @@ public class OrdersImpl implements IOrdersService {
 	}
 
 	@Override
-	public Orders updateOrder(Orders order) {
-		try {			
-			order.setOrderStatus("Em andamento");
+	public Orders updateOrder(Orders order, String status) {
+		try {
+			order.setOrderStatus(status);
 			return dao.save(order);
 		}catch(Exception ex) {
 			ex.printStackTrace();
