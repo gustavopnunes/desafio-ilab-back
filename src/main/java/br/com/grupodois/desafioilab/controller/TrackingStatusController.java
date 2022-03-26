@@ -46,20 +46,23 @@ public class TrackingStatusController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO statusString) {
-
-		TrackingStatusEnum status = TrackingStatusEnum.valueOf(statusString.getStatus());  
-		
-		TrackingStatus ts = service.getTrackingStatusById(id);
-		ts.setStatus(status);
-		service.updateTrackingStatus(ts);
-				
-		if (status.getCode() == 1) { 
-			Orders order = ts.getOrder();
+		try { 
+			TrackingStatusEnum status = TrackingStatusEnum.valueOf(statusString.getStatus());  
 			
-			order.setOrderStatus("entregue");
-			ordersService.updateOrder(order);
-		}
+			TrackingStatus ts = service.getTrackingStatusById(id);
+			ts.setStatus(status);
+			service.updateTrackingStatus(ts);
+			
+			if (status.getCode() == 1) { 
+				Orders order = ts.getOrder();
+				
+				order.setOrderStatus("entregue");
+				ordersService.updateOrder(order);
+			}
 		
-		return ResponseEntity.ok(200);
+			return ResponseEntity.status(200).body(null);
+		} catch(Exception e) { 
+			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido");
+		}
 	}
 }
