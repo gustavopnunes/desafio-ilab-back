@@ -22,5 +22,10 @@ public class OrdersImpl implements IOrdersService {
 		return dao.findAllByOrderStatus(status, firstPage);
 	}
 
+	@Override
+	public Orders updateOrder(Orders updatedOrder) {
+		return dao.save(updatedOrder);
+	}
+	
 	
 }
