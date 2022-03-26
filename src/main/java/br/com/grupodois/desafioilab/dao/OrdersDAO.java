@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.grupodois.desafioilab.model.Orders;
 
-public interface OrdersDAO extends PagingAndSortingRepository<Orders, Integer> {
+public interface OrdersDAO extends PagingAndSortingRepository<Orders, Number> {
     
   public List<Orders> findAllByOrderStatus(String status, Pageable p);
 
