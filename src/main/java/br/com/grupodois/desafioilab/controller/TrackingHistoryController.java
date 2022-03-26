@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.grupodois.desafioilab.dao.TrackingHistoryDAO;
 import br.com.grupodois.desafioilab.model.TrackingHistory;
 import br.com.grupodois.desafioilab.service.ITrackingHistoryService;
 

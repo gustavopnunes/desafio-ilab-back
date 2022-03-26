@@ -1,4 +1,4 @@
-package br.com.grupodois.desafioilab.services;
+package br.com.grupodois.desafioilab.service;
 
 import br.com.grupodois.desafioilab.dto.DeliveryPersonLoginDTO;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;

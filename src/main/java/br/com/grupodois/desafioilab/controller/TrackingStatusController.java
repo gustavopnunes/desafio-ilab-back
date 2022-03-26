@@ -28,16 +28,31 @@ public class TrackingStatusController {
 	@Autowired
 	private IOrdersService ordersService;
 	
+	@Autowired
+	public IOrdersService orderService;
+	
 	@PostMapping
 	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus novo) {
 		try {
-			novo = service.createTrackingStatus(novo);
+			Long orderId = novo.getOrder().getId();
+			Orders order = orderService.getOrderById(orderId);
 			
-			if (novo != null) {
-				return ResponseEntity.status(201).body(novo);
+			if (order != null) {
+				if (order.getOrderStatus().toLowerCase().equals("aberto")) {
+
+					order = orderService.updateOrder(order, "Em andamento");
+					
+					novo = service.createTrackingStatus(novo);
+					
+					if (novo != null) {
+						return ResponseEntity.status(201).body(novo);
+					}
+					
+					return ResponseEntity.status(404).body("Dados inválidos.");
+				}
+				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
 			}
-			
-			return ResponseEntity.status(404).body("Dados inválidos.");
+			return ResponseEntity.status(404).body("Produto: " + orderId + " não encontrado.");
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());
