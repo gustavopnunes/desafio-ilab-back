@@ -21,11 +21,6 @@ public class OrdersImpl implements IOrdersService {
 		Pageable firstPage = PageRequest.of(0, items);
 		return dao.findAllByOrderStatus(status, firstPage);
 	}
-
-	@Override
-	public Orders updateOrder(Orders updatedOrder) {
-		return dao.save(updatedOrder);
-	}
 	
 	@Override
 	public Orders getOrderById(Long id) {

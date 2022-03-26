@@ -26,9 +26,6 @@ public class TrackingStatusController {
 	private ITrackingStatusService service;
 
 	@Autowired
-	private IOrdersService ordersService;
-	
-	@Autowired
 	public IOrdersService orderService;
 	
 	@PostMapping
@@ -68,11 +65,12 @@ public class TrackingStatusController {
 			ts.setStatus(status);
 			service.updateTrackingStatus(ts);
 			
-			if (status.getCode() == 1) { 
-				Orders order = ts.getOrder();
-				
-				order.setOrderStatus("entregue");
-				ordersService.updateOrder(order);
+			Orders order = ts.getOrder();
+
+			if (status.getCode() == 1) { 	
+				orderService.updateOrder(order, "entregue");
+			} else { 
+				orderService.updateOrder(order, "aberto");
 			}
 		
 			return ResponseEntity.status(200).body(null);

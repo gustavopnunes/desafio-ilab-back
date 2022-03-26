@@ -8,7 +8,6 @@ import br.com.grupodois.desafioilab.model.Orders;
 
 public interface IOrdersService {
 	public List<Orders> getOrderByStatus(@RequestParam(name = "status") String status, @RequestParam(name = "items") int items);
-	public Orders updateOrder(Orders updatedOrder);
-	Orders getOrderById(Long id);
-	Orders updateOrder(Orders order, String status);
+	public Orders getOrderById(Long id);
+	public Orders updateOrder(Orders order, String status);
 }
