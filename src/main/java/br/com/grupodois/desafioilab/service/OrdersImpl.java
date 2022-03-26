@@ -21,7 +21,7 @@ public class OrdersImpl implements IOrdersService {
 		Pageable firstPage = PageRequest.of(0, items);
 		return dao.findAllByOrderStatus(status, firstPage);
 	}
-
+	
 	@Override
 	public Orders getOrderById(Long id) {
 		try {
