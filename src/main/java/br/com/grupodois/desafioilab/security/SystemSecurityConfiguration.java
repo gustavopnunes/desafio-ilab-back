@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration 			
 @EnableWebSecurity 
 public class SystemSecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+		
 	@Autowired
 	private SystemEntryPoint entryPoint; 
 	
