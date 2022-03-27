@@ -73,7 +73,7 @@ public class TrackingStatusController {
 				orderService.updateOrder(order, "aberto");
 			}
 		
-			return ResponseEntity.status(200).body(null);
+			return ResponseEntity.status(200).body("Status atualizado com sucesso!");
 		} catch(Exception e) { 
 			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido");
 		}
