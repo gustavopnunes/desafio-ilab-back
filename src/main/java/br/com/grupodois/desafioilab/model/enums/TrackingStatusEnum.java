@@ -1,7 +1,10 @@
 package br.com.grupodois.desafioilab.model.enums;
 
-public enum TrackingStatusEnum {
 
+
+public enum TrackingStatusEnum {
+	
+	
 	DELIVERED(1),
 	CANCELED(2);
 	
@@ -14,6 +17,7 @@ public enum TrackingStatusEnum {
 	public int getCode() {
 		return code;
 	}
+	
 	
 	public static TrackingStatusEnum valueOf(int code) {
 		for(TrackingStatusEnum value : TrackingStatusEnum.values()) {

@@ -93,4 +93,12 @@ public class TrackingStatus {
 	public void setTrackingHistoryList(List<TrackingHistory> trackingHistoryList) {
 		this.trackingHistoryList = trackingHistoryList;
 	}
+
+	@Override
+	public String toString() {
+		return "TrackingStatus [id=" + id + ", order=" + order + ", dpId=" + dpId + ", trackingHistoryList="
+				+ trackingHistoryList + ", status=" + status + "]";
+	}
+	
+	
 }

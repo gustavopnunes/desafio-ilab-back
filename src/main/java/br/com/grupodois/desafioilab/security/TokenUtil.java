@@ -12,7 +12,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
 
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 
@@ -27,7 +26,6 @@ public class TokenUtil {
 	private static final String EMISSOR = "DeliveryApp";
 	
 	public static String createToken(DeliveryPerson user) { 
-		
 		try {
 		    String token = JWT.create()
 		        .withIssuer(EMISSOR)
@@ -35,8 +33,7 @@ public class TokenUtil {
 		    
 		    return PREFIX + token;
 		} catch (JWTCreationException exception){
-			exception.printStackTrace();
-			return null;
+			throw new JWTVerificationException(exception.getMessage());
 		}	
 	}
 	
@@ -47,11 +44,11 @@ public class TokenUtil {
 		    JWTVerifier verifier = JWT.require(ALGORITHM)
 		        .withIssuer(EMISSOR)
 		        .build(); 
-		    DecodedJWT jwt = verifier.verify(token);
+		    verifier.verify(token);
 		    return new UsernamePasswordAuthenticationToken(null, null, Collections.emptyList());
 		    
 		} catch (JWTVerificationException exception){
-			throw new Exception("Token inválido"); 
+			throw new JWTVerificationException(exception.getMessage()); 
 		}
 	}
 }
