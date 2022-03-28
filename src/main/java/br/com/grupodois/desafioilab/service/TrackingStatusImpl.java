@@ -14,6 +14,7 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 	
 	@Override
 	public TrackingStatus createTrackingStatus(TrackingStatus novo) {
+		
 		return dao.save(novo) ;
 	}
 	
