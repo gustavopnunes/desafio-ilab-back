@@ -16,4 +16,16 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 	public TrackingStatus createTrackingStatus(TrackingStatus novo) {
 		return dao.save(novo) ;
 	}
+	
+	@Override
+	public TrackingStatus getTrackingStatusById(Long id) {
+		return dao.getById(id);
+	}
+
+	@Override
+	public TrackingStatus updateTrackingStatus(TrackingStatus updatedTS) {
+		return dao.save(updatedTS);
+	}
+
+
 }

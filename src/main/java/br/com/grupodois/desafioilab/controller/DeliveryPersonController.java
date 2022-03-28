@@ -24,15 +24,22 @@ public class DeliveryPersonController {
 
 	@ApiOperation(value = "Cadastro do Entregador")
 	@PostMapping("/register")
-	public ResponseEntity<String> cadastrar(@RequestBody DeliveryPerson newUser) throws Exception { 
+	public ResponseEntity<String> register(@RequestBody DeliveryPerson newUser) throws Exception { 
 		try { 
+			if (newUser.getDpEmail() == null || newUser.getDpCpf() == null || newUser.getDpPhone() == null || newUser.getDpName() == null || newUser.getDpPassword() == null) { 
+				throw new IllegalArgumentException();
+			}
+			newUser.setDpEmail(newUser.getDpEmail().toLowerCase());
 			newUser.setDpPassword(SystemCrypto.encrypt(newUser.getDpPassword()));
+			dao.save(newUser);
+			return ResponseEntity.status(201).body("Cadastro realizado com sucesso!");
 			
-		dao.save(newUser);
-		return ResponseEntity.ok("Show show cadastro top");
+		} catch (IllegalArgumentException e) { 
+			System.out.print(e.getStackTrace());
+			return ResponseEntity.status(400).body("Campos nome, email, telefone, cpf e senha sao obrigatorios.");
 		} catch (Exception e) { 
 			System.out.print(e.getStackTrace());
-			return null;
+			return ResponseEntity.status(400).body("Nao foi possivel realizar o cadastro.");
 		}
 	}
 	@GetMapping("/ping")

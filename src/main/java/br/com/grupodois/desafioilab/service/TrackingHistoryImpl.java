@@ -23,8 +23,6 @@ public class TrackingHistoryImpl implements ITrackingHistoryService{
 	public TrackingHistory createTrackingRecord(TrackingHistory newRecording) {
 		return dao.save(newRecording);
 	}
-	
-
 
 
 }
