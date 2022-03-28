@@ -16,10 +16,13 @@ import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
 import br.com.grupodois.desafioilab.service.IOrdersService;
 import br.com.grupodois.desafioilab.service.ITrackingStatusService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value = "tracking-status")
+@Api(value = "Rastreio")
 public class TrackingStatusController {
 
 	@Autowired
@@ -28,6 +31,7 @@ public class TrackingStatusController {
 	@Autowired
 	public IOrdersService orderService;
 	
+	@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
 	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus novo) {
 		try {
@@ -35,9 +39,9 @@ public class TrackingStatusController {
 			Orders order = orderService.getOrderById(orderId);
 			
 			if (order != null) {
-				if (order.getOrderStatus().toLowerCase().equals("aberto")) {
+				if (order.getOrderStatus().toUpperCase().equals("OPENED")) {
 
-					order = orderService.updateOrder(order, "Em andamento");
+					order = orderService.updateOrder(order, "IN PROGRESS");
 					
 					novo = service.createTrackingStatus(novo);
 					
@@ -68,14 +72,14 @@ public class TrackingStatusController {
 			Orders order = ts.getOrder();
 
 			if (status.getCode() == 1) { 	
-				orderService.updateOrder(order, "entregue");
+				orderService.updateOrder(order, "DELIVERED");
 			} else { 
-				orderService.updateOrder(order, "aberto");
+				orderService.updateOrder(order, "OPENED");
 			}
 		
 			return ResponseEntity.status(200).body("Status atualizado com sucesso!");
 		} catch(Exception e) { 
-			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido");
+			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido.");
 		}
 	}
 }
