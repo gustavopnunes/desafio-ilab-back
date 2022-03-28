@@ -39,9 +39,9 @@ public class TrackingStatusController {
 			Orders order = orderService.getOrderById(orderId);
 			
 			if (order != null) {
-				if (order.getOrderStatus().toLowerCase().equals("aberto")) {
+				if (order.getOrderStatus().toUpperCase().equals("OPENED")) {
 
-					order = orderService.updateOrder(order, "Em andamento");
+					order = orderService.updateOrder(order, "IN PROGRESS");
 					
 					novo = service.createTrackingStatus(novo);
 					
@@ -72,14 +72,14 @@ public class TrackingStatusController {
 			Orders order = ts.getOrder();
 
 			if (status.getCode() == 1) { 	
-				orderService.updateOrder(order, "entregue");
+				orderService.updateOrder(order, "DELIVERED");
 			} else { 
-				orderService.updateOrder(order, "aberto");
+				orderService.updateOrder(order, "OPENED");
 			}
 		
 			return ResponseEntity.status(200).body("Status atualizado com sucesso!");
 		} catch(Exception e) { 
-			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido");
+			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido.");
 		}
 	}
 }

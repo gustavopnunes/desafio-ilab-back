@@ -30,7 +30,7 @@ public class SwaggerConfig {
 	 private ApiInfo apiInfo() {
 	        return new ApiInfoBuilder()
 	                .contact(new Contact("Code and Tears", "", ""))
-	                .title("Tracking_Challenge")
+	                .title("Tracking Challenge")
 	                .description("Documentação API - Track History - Telemetria dos entregadores do iFood")
 	                .version("1.0")
 	                .build();

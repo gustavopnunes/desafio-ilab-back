@@ -28,14 +28,14 @@ public class LoginController {
 	public ResponseEntity<?> login(@RequestBody DeliveryPersonLoginDTO loginData) throws Exception { 
 		try { 
 			if ((loginData.getEmail() == null && loginData.getPhone() == null) || loginData.getPassword() == null) { 
-				throw new IllegalArgumentException("Campos telefone/email e senha sao obrigatorios");
+				throw new IllegalArgumentException("Campos Telefone/E-mail e Senha são obrigatórios.");
 			}
 			String email = loginData.getEmail() != null ? loginData.getEmail().toLowerCase() : null; 
 			
 			DeliveryPerson user = dao.findByDpEmailOrDpPhone(email, loginData.getPhone());
 			
 			if (user == null) {
-				throw new IllegalArgumentException("Login e/ou senha incorretos"); 			 	
+				throw new IllegalArgumentException("Login e/ou Senha incorretos."); 			 	
 			}
 			Token token = service.generateUserToken(loginData, user);
 			return ResponseEntity.ok(token);
@@ -45,7 +45,7 @@ public class LoginController {
 			return ResponseEntity.status(400).body(e.getMessage());
 		} catch (Exception e) { 
 			System.out.print(e.getStackTrace());
-			return ResponseEntity.status(400).body("Nao foi possivel autenticar usuario");
+			return ResponseEntity.status(400).body("Não foi possível autenticar usuário.");
 		}
 	}
 }
