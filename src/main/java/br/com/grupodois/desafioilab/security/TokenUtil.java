@@ -27,9 +27,10 @@ public class TokenUtil {
 	
 	public static String createToken(DeliveryPerson user) { 
 		try {
-		    String token = JWT.create()
+		    String token = JWT.create().withClaim("userId", user.getId())
 		        .withIssuer(EMISSOR)
 		        .sign(ALGORITHM);
+		       
 		    
 		    return PREFIX + token;
 		} catch (JWTCreationException exception){
