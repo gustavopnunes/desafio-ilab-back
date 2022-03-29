@@ -43,16 +43,16 @@ public class Orders {
 	@JsonIgnore
 	private List<TrackingStatus> trackingStatusList;
 	
-	public Orders() {
-	}
+	public Orders() {}
 
-	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Client clientId) {
+	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Long clientId) {
 		super();
 		this.id = id;
 		this.orderDate = orderDate;
 		this.orderValue = orderValue;
 		this.orderStatus = orderStatus;
-		this.clientId = clientId;
+		this.clientId = new Client();
+		this.clientId.setId(clientId);
 	}
 
 	public Long getId() {
@@ -102,5 +102,12 @@ public class Orders {
 	public void setTrackingStatusList(List<TrackingStatus> trackingStatusList) {
 		this.trackingStatusList = trackingStatusList;
 	}
+
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", orderDate=" + orderDate + ", orderValue=" + orderValue + ", orderStatus="
+				+ orderStatus + ", clientId=" + clientId + ", trackingStatusList=" + trackingStatusList + "]";
+	}
+
 
 }
