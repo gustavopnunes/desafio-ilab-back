@@ -32,7 +32,7 @@ public class OrdersController {
 	@GetMapping
 	public ResponseEntity<List<Orders>> getAllOrdersByStatus(@RequestParam(name = "status") String status, @RequestParam(name = "items") int items) {
 		
-    	List<Orders> response = service.getOrderByStatus(status, items);
+    	List<Orders> response = service.getOrderByStatus(status.toUpperCase(), items);
     	if (response.size() != 0) {
     		return ResponseEntity.ok(response);
     	}
