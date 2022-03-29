@@ -33,9 +33,7 @@ public class Client {
 	@JsonIgnoreProperties("clientId")
 	private List<Orders> ordersList;
 	
-    public Client() {
-    	
-    }
+    public Client() {}
 
 	public Client(Long id, String clientName, String clientCpf, String clientAddress, List<Orders> ordersList) {
 		super();

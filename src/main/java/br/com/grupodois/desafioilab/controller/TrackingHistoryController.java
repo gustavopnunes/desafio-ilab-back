@@ -31,7 +31,7 @@ public class TrackingHistoryController {
 	@ApiOperation(value = "Criação do Histórico de Localização")
 	@ApiResponses(value = {
 		    @ApiResponse(code = 201, message = "Criação de Histórico de Localização realizado com sucesso."),
-		    @ApiResponse(code = 403, message = "Para acessar este recurso um token de autenticação válido deve ser enviado.")})
+		    @ApiResponse(code = 403, message = "Para acessar este recurso um Token de autenticação válido deve ser enviado.")})
 	@PostMapping
 	public ResponseEntity<?> createNewTrackingRecord(@RequestBody TrackingHistory newRecording) {
 		try {

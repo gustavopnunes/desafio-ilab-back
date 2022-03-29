@@ -35,13 +35,14 @@ public class DeliveryPersonController {
 			return ResponseEntity.status(201).body("Cadastro realizado com sucesso!");
 			
 		} catch (IllegalArgumentException e) { 
-			System.out.print(e.getStackTrace());
-			return ResponseEntity.status(400).body("Campos nome, email, telefone, cpf e senha sao obrigatorios.");
+			e.getStackTrace();
+			return ResponseEntity.status(400).body("Campos Nome, E-mail, Telefone, CPF e Senha são obrigatórios.");
 		} catch (Exception e) { 
-			System.out.print(e.getStackTrace());
-			return ResponseEntity.status(400).body("Nao foi possivel realizar o cadastro.");
+			e.getStackTrace();
+			return ResponseEntity.status(400).body("Não foi possível realizar o cadastro.");
 		}
 	}
+	
 	@GetMapping("/ping")
 	public String AuthTest() { 
 		return "Pong";
