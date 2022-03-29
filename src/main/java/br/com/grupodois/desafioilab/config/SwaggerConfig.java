@@ -13,26 +13,29 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+@EnableSwagger2
 public class SwaggerConfig {
 
 	 @Bean
-	    public Docket api() {
-	        return new Docket(DocumentationType.SWAGGER_2)
-	          .select()
-	          .apis(RequestHandlerSelectors.basePackage("br.com.grupodois.desafioilab"))
-	          .paths(PathSelectors.ant("/**"))
-	          .build()
-//	          .ignoredParameterTypes(DeliveryPerson.class)
-	          .apiInfo(apiInfo());
-	    }
-	 
-	 private ApiInfo apiInfo() {
-	        return new ApiInfoBuilder()
-	                .contact(new Contact("Code and Tears", "", ""))
-	                .title("Tracking Challenge")
-	                .description("Documentação API - Track History - Telemetria dos entregadores do iFood")
-	                .version("1.0")
-	                .build();
-	    }
+	 public Docket api() {
+		 return new Docket(DocumentationType.SWAGGER_2)
+				 .select()
+				 .apis(RequestHandlerSelectors.basePackage("br.com.grupodois.desafioilab"))
+				 .paths(PathSelectors.any())
+				 .build()
+				 .useDefaultResponseMessages(false)
+				 .apiInfo(apiInfo());
+	 }
+
+		private ApiInfo apiInfo() {
+		    return new ApiInfoBuilder()
+		    		.contact(new Contact("Code and Tears", "", ""))
+					 .title("Tracking_Challenge")
+					 .description("Documentação API - Track History - Telemetria dos entregadores do iFood")
+					 .version("1.0")
+					 .build();
+		}
 }
+
+
 

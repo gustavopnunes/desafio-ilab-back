@@ -42,9 +42,4 @@ public class DeliveryPersonController {
 			return ResponseEntity.status(400).body("Não foi possível realizar o cadastro.");
 		}
 	}
-	
-	@GetMapping("/ping")
-	public String AuthTest() { 
-		return "Pong";
-	}
 }
