@@ -1,8 +1,10 @@
 package br.com.grupodois.desafioilab.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.grupodois.desafioilab.dao.DeliveryPersonDAO;
 import br.com.grupodois.desafioilab.dto.DeliveryPersonLoginDTO;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.security.SystemCrypto;
@@ -11,6 +13,9 @@ import br.com.grupodois.desafioilab.security.TokenUtil;
 
 @Component
 public class DeliveryPersonImpl implements IDeliveryPerson {
+	
+	@Autowired 
+	DeliveryPersonDAO dao; 
 
 	@Override
 	public Token generateUserToken(DeliveryPersonLoginDTO loginData, DeliveryPerson user) throws Exception {	
@@ -32,6 +37,11 @@ public class DeliveryPersonImpl implements IDeliveryPerson {
 			e.printStackTrace(System.out);
 			throw new Exception("Nao foi possivel autenticar");
 		}
+	}
+
+	@Override
+	public DeliveryPerson getDeliveryPersonById(Long id) {
+			return dao.findById(id);			
 	}
 
 }

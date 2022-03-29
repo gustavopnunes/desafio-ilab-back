@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.grupodois.desafioilab.dto.TrackingStatusDTO;
+import br.com.grupodois.desafioilab.dto.RequestTrackingStatusDTO;
+import br.com.grupodois.desafioilab.dto.ResponseTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
@@ -34,31 +35,14 @@ public class TrackingStatusController {
 	
 	@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
-	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus novo) {
+	public ResponseEntity<?> createTrackingStatus (@RequestBody RequestTrackingStatusDTO novo) {
 		try {
-			Long orderId = novo.getOrder().getId();
-			Orders order = orderService.getOrderById(orderId);
-			
-			if (order != null) {
-				if (order.getOrderStatus().toUpperCase().equals("OPEN")) {
-
-					order = orderService.updateOrder(order, "IN PROGRESS");
+			TrackingStatus newTrackingStatus = service.createTrackingStatus(novo);
+			return ResponseEntity.status(201).body(ResponseTrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
 					
-					novo = service.createTrackingStatus(novo);
-					
-					if (novo != null) {
-						
-						return ResponseEntity.status(201).body(TrackingStatusDTO.fromTrackingStatus(novo));
-					}
-					
-					return ResponseEntity.status(404).body("Dados inválidos.");
-				}
-				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
-			}
-			return ResponseEntity.status(404).body("Produto: " + orderId + " não encontrado.");
 		} catch(Exception ex) {
 			ex.printStackTrace();
-			return ResponseEntity.status(500).body(ex.getMessage());
+			return ResponseEntity.status(400).body(ex.getMessage());
 		}
 	}
 	
