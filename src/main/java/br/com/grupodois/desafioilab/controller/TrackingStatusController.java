@@ -34,21 +34,22 @@ public class TrackingStatusController {
 	
 	@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
-	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus novo) {
+	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus newTrackingStatus) {
 		try {
-			Long orderId = novo.getOrder().getId();
+			Long orderId = newTrackingStatus.getOrder().getId();
 			Orders order = orderService.getOrderById(orderId);
 			
 			if (order != null) {
+				System.out.print(order.getOrderStatus());
 				if (order.getOrderStatus().toUpperCase().equals("OPENED")) {
 
 					order = orderService.updateOrder(order, "IN PROGRESS");
 					
-					novo = service.createTrackingStatus(novo);
+					newTrackingStatus = service.createTrackingStatus(newTrackingStatus);
 					
-					if (novo != null) {
+					if (newTrackingStatus != null) {
 						
-						return ResponseEntity.status(201).body(TrackingStatusDTO.fromTrackingStatus(novo));
+						return ResponseEntity.status(201).body(TrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
 					}
 					
 					return ResponseEntity.status(404).body("Dados inválidos.");
@@ -63,17 +64,17 @@ public class TrackingStatusController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO statusString) {
+	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO status) {
 		try { 
-			TrackingStatusEnum status = TrackingStatusEnum.valueOf(statusString.getStatus());  
+			TrackingStatusEnum tsStatus = TrackingStatusEnum.valueOf(status.getStatus());  
 			
 			TrackingStatus ts = service.getTrackingStatusById(id);
-			ts.setStatus(status);
+			ts.setStatus(tsStatus);
 			service.updateTrackingStatus(ts);
 			
 			Orders order = ts.getOrder();
 
-			if (status.getCode() == 1) { 	
+			if (tsStatus.getCode() == 1) { 	
 				orderService.updateOrder(order, "DELIVERED");
 			} else { 
 				orderService.updateOrder(order, "OPENED");
