@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.grupodois.desafioilab.dto.TrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
@@ -46,7 +47,8 @@ public class TrackingStatusController {
 					novo = service.createTrackingStatus(novo);
 					
 					if (novo != null) {
-						return ResponseEntity.status(201).body(novo);
+						
+						return ResponseEntity.status(201).body(TrackingStatusDTO.fromTrackingStatus(novo));
 					}
 					
 					return ResponseEntity.status(404).body("Dados inválidos.");
