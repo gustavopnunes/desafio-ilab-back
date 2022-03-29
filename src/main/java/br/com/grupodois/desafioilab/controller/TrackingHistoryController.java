@@ -41,7 +41,7 @@ public class TrackingHistoryController {
 				return ResponseEntity.status(201).body(newRecording);
 			}
 
-			return ResponseEntity.status(404).body("Dados inválidos.");
+			return ResponseEntity.status(400).body("Dados inválidos.");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());

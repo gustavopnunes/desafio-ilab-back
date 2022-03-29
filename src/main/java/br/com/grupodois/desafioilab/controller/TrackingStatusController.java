@@ -51,7 +51,7 @@ public class TrackingStatusController {
 						return ResponseEntity.status(201).body(TrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
 					}
 					
-					return ResponseEntity.status(404).body("Dados inválidos.");
+					return ResponseEntity.status(400).body("Dados inválidos.");
 				}
 				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
 			}
