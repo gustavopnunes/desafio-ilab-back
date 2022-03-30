@@ -8,4 +8,6 @@ public interface DeliveryPersonDAO extends CrudRepository<DeliveryPerson, Intege
 
 	DeliveryPerson findByDpEmailOrDpPhone(String email, String phone);
 
+	DeliveryPerson findById(Long id);
+
 }

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.grupodois.desafioilab.dto.TrackingStatusDTO;
+import br.com.grupodois.desafioilab.dto.RequestTrackingStatusDTO;
+import br.com.grupodois.desafioilab.dto.ResponseTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
+import br.com.grupodois.desafioilab.exceptions.CustomException;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
@@ -34,28 +36,15 @@ public class TrackingStatusController {
 	
 	//@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
-	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus newTrackingStatus) {
+	public ResponseEntity<?> createTrackingStatus (@RequestBody RequestTrackingStatusDTO novo) {
 		try {
-			Long orderId = newTrackingStatus.getOrder().getId();
-			Orders order = orderService.getOrderById(orderId);
-			
-			if (order != null) {
-				if (order.getOrderStatus().toUpperCase().equals("OPEN")) {
+			TrackingStatus newTrackingStatus = service.createTrackingStatus(novo);
+			return ResponseEntity.status(201).body(ResponseTrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
+					
+		} catch(CustomException exception) {
+			exception.printStackTrace();
+			return ResponseEntity.status(exception.getStatusCode()).body(exception.getMessage());
 
-					order = orderService.updateOrder(order, "IN PROGRESS");
-					
-					newTrackingStatus = service.createTrackingStatus(newTrackingStatus);
-					
-					if (newTrackingStatus != null) {
-						
-						return ResponseEntity.status(201).body(TrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
-					}
-					
-					return ResponseEntity.status(400).body("Dados inválidos.");
-				}
-				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
-			}
-			return ResponseEntity.status(404).body("Produto: " + orderId + " não encontrado.");
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());
