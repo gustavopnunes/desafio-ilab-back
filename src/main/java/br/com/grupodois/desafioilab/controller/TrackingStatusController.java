@@ -39,18 +39,18 @@ public class TrackingStatusController {
 			Orders order = orderService.getOrderById(orderId);
 			
 			if (order != null) {
-				if (order.getOrderStatus().toUpperCase().equals("OPENED")) {
-
-					order = orderService.updateOrder(order, "IN PROGRESS");
-					
-					novo = service.createTrackingStatus(novo);
-					
-					if (novo != null) {
-						return ResponseEntity.status(201).body(novo);
-					}
-					
-					return ResponseEntity.status(404).body("Dados inválidos.");
-				}
+//				if (order.getOrderStatus().toUpperCase().equals("OPENED")) {
+//
+//					order = orderService.updateOrder(order, "IN PROGRESS");
+//					
+//					novo = service.createTrackingStatus(novo);
+//					
+//					if (novo != null) {
+//						return ResponseEntity.status(201).body(novo);
+//					}
+//					
+//					return ResponseEntity.status(404).body("Dados inválidos.");
+//				}
 				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
 			}
 			return ResponseEntity.status(404).body("Produto: " + orderId + " não encontrado.");
@@ -71,11 +71,11 @@ public class TrackingStatusController {
 			
 			Orders order = ts.getOrder();
 
-			if (status.getCode() == 1) { 	
-				orderService.updateOrder(order, "DELIVERED");
-			} else { 
-				orderService.updateOrder(order, "OPENED");
-			}
+//			if (status.getCode() == 1) { 	
+//				orderService.updateOrder(order, "DELIVERED");
+//			} else { 
+//				orderService.updateOrder(order, "OPENED");
+//			}
 		
 			return ResponseEntity.status(200).body("Status atualizado com sucesso!");
 		} catch(Exception e) { 

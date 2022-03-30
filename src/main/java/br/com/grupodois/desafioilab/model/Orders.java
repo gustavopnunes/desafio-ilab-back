@@ -31,6 +31,7 @@ public class Orders {
 	@Column(name = "order_value", nullable = false)
 	private Double orderValue;
 	
+	//@Enumerated(EnumType.STRING)
 	@Column(name = "order_status", length = 20, nullable = false)
 	private String orderStatus;
 	

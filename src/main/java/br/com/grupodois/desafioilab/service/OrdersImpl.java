@@ -54,6 +54,8 @@ public class OrdersImpl implements IOrdersService {
 	@Override
 	public Orders createNewOrder(OrdersDTO newOrder) {
 		try {
+			//OrdersEnum status = OrdersEnum.valueOf(newOrder.getOrderStatus());  
+
 			Client client = clientDao.getById(newOrder.getClientId());
 			
 			Orders order = new Orders();
@@ -69,4 +71,7 @@ public class OrdersImpl implements IOrdersService {
 			return null;
 		}
 	}
+
+
+
 }
