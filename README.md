@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://i.imgur.com/sAvv5kW.png" title="EntregaLover Logo" width="400" />
+  <img src="https://i.imgur.com/pnrj6LW.png" title="EntregaLover Logo" width="400" />
 </h1>
 
 ## Sobre o projeto
