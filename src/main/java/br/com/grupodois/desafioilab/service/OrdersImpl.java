@@ -32,7 +32,7 @@ public class OrdersImpl implements IOrdersService {
 	@Override
 	public Orders getOrderById(Long id) {
 		try {
-			return ordersDao.findById(id).get();
+			return ordersDao.findById(id);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}

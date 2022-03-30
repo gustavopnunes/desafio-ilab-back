@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.grupodois.desafioilab.model.TrackingHistory;
 import br.com.grupodois.desafioilab.service.ITrackingHistoryService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiResponse;
+//import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/tracking-history")
-@Api(value = "Histórico de Localização")
+//@Api(value = "Histórico de Localização")
 public class TrackingHistoryController {
 
 	@Autowired
 	private ITrackingHistoryService service;
 
-	@ApiOperation(value = "Criação do Histórico de Localização")
-	@ApiResponses(value = {
-		    @ApiResponse(code = 201, message = "Criação de Histórico de Localização realizado com sucesso."),
-		    @ApiResponse(code = 403, message = "Para acessar este recurso um Token de autenticação válido deve ser enviado.")})
+	//@ApiOperation(value = "Criação do Histórico de Localização")
+	//@ApiResponses(value = {
+	//	    @ApiResponse(code = 201, message = "Criação de Histórico de Localização realizado com sucesso."),
+	//	    @ApiResponse(code = 403, message = "Para acessar este recurso um Token de autenticação válido deve ser enviado.")})
 	@PostMapping
 	public ResponseEntity<?> createNewTrackingRecord(@RequestBody TrackingHistory newRecording) {
 		try {
@@ -41,14 +41,14 @@ public class TrackingHistoryController {
 				return ResponseEntity.status(201).body(newRecording);
 			}
 
-			return ResponseEntity.status(404).body("Dados inválidos.");
+			return ResponseEntity.status(400).body("Dados inválidos.");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());
 		}
 	}
 
-	@ApiOperation(value = "Retorno do Histórico de Localização por Pedido")
+//	@ApiOperation(value = "Retorno do Histórico de Localização por Pedido")
 	@GetMapping("orders/{id}")
 	public ResponseEntity<?> listTrackingHistory(@PathVariable Long id) {
 		try {

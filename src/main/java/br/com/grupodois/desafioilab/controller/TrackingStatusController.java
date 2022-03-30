@@ -10,19 +10,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.grupodois.desafioilab.dto.RequestTrackingStatusDTO;
+import br.com.grupodois.desafioilab.dto.ResponseTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
+import br.com.grupodois.desafioilab.exceptions.CustomException;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
 import br.com.grupodois.desafioilab.service.IOrdersService;
 import br.com.grupodois.desafioilab.service.ITrackingStatusService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value = "tracking-status")
-@Api(value = "Rastreio")
+//@Api(value = "Rastreio")
 public class TrackingStatusController {
 
 	@Autowired
@@ -31,29 +34,25 @@ public class TrackingStatusController {
 	@Autowired
 	public IOrdersService orderService;
 	
-	@ApiOperation(value = "Criação do Rastreio de um Produto")
+	//@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
-	public ResponseEntity<?> createTrackingStatus (@RequestBody TrackingStatus novo) {
+	public ResponseEntity<?> createTrackingStatus (@RequestBody RequestTrackingStatusDTO novo) {
 		try {
 			Long orderId = novo.getOrder().getId();
 			Orders order = orderService.getOrderById(orderId);
 			
 			if (order != null) {
-//				if (order.getOrderStatus().toUpperCase().equals("OPEN")) {
-//
-//					order = orderService.updateOrder(order, "IN PROGRESS");
-//					
-//					novo = service.createTrackingStatus(novo);
-//					
-//					if (novo != null) {
-//						return ResponseEntity.status(201).body(novo);
-//					}
-//					
-//					return ResponseEntity.status(404).body("Dados inválidos.");
-//				}
+
 				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
 			}
 			return ResponseEntity.status(404).body("Produto: " + orderId + " não encontrado.");
+			TrackingStatus newTrackingStatus = service.createTrackingStatus(novo);
+			return ResponseEntity.status(201).body(ResponseTrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
+					
+		} catch(CustomException exception) {
+			exception.printStackTrace();
+			return ResponseEntity.status(exception.getStatusCode()).body(exception.getMessage());
+
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());
@@ -61,21 +60,21 @@ public class TrackingStatusController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO statusString) {
+	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO status) {
 		try { 
-			TrackingStatusEnum status = TrackingStatusEnum.valueOf(statusString.getStatus());  
+			TrackingStatusEnum tsStatus = TrackingStatusEnum.valueOf(status.getStatus());  
 			
 			TrackingStatus ts = service.getTrackingStatusById(id);
-			ts.setStatus(status);
+			ts.setStatus(tsStatus);
 			service.updateTrackingStatus(ts);
 			
 			Orders order = ts.getOrder();
 
-//			if (status.getCode() == 1) { 	
-//				orderService.updateOrder(order, "DELIVERED");
-//			} else { 
-//				orderService.updateOrder(order, "OPEN");
-//			}
+			if (tsStatus.getCode() == 1) { 	
+				orderService.updateOrder(order, "DELIVERED");
+			} else { 
+				orderService.updateOrder(order, "OPEN");
+			}
 		
 			return ResponseEntity.status(200).body("Status atualizado com sucesso!");
 		} catch(Exception e) { 
