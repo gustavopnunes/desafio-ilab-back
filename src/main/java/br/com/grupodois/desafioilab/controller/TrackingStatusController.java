@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.grupodois.desafioilab.dto.RequestTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.ResponseTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
+import br.com.grupodois.desafioilab.exceptions.CustomException;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
@@ -40,9 +41,12 @@ public class TrackingStatusController {
 			TrackingStatus newTrackingStatus = service.createTrackingStatus(novo);
 			return ResponseEntity.status(201).body(ResponseTrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
 					
+		} catch(CustomException exception) {
+			exception.printStackTrace();
+			return ResponseEntity.status(exception.getStatusCode()).body(exception.getMessage());
 		} catch(Exception ex) {
 			ex.printStackTrace();
-			return ResponseEntity.status(400).body(ex.getMessage());
+			return ResponseEntity.status(500).body(ex.getMessage());
 		}
 	}
 	

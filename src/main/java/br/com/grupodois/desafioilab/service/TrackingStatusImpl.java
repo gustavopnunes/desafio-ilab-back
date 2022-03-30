@@ -9,6 +9,7 @@ import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
+import br.com.grupodois.desafioilab.exceptions.CustomException;
 
 @Component
 public class TrackingStatusImpl implements ITrackingStatusService {
@@ -29,16 +30,16 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 						
 			DeliveryPerson dp = dpService.getDeliveryPersonById(trackingStatusDTO.getDpId());
 			if (dp == null) { 
-				throw new Exception("Cliente de id " + trackingStatusDTO.getDpId() + " não encontrado.");				
+				throw new CustomException("Cliente de id " + trackingStatusDTO.getDpId() + " não encontrado.", 404);				
 			}
 			
 			Orders order = orderService.getOrderById(trackingStatusDTO.getOrderId());
 			if (order == null) { 
-				throw new Exception("Produto: " + trackingStatusDTO.getOrderId() + " não encontrado.");
+				throw new CustomException("Produto: " + trackingStatusDTO.getOrderId() + " não encontrado.", 404);
 			}
 			
 			if (!order.getOrderStatus().toUpperCase().equals("OPEN")) {				
-				throw new Exception("Pedido: "+ trackingStatusDTO.getOrderId() + " não está disponível para entrega.");
+				throw new CustomException("Pedido: "+ trackingStatusDTO.getOrderId() + " não está disponível para entrega.", 400);
 			}
 			order = orderService.updateOrder(order, "IN PROGRESS");
 			
@@ -50,7 +51,7 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 			TrackingStatus newTrackingStatus = dao.save(ts);
 			
 			if (newTrackingStatus == null) { 
-				throw new Exception("Dados inválidos.");				
+				throw new CustomException("Dados inválidos.", 400);				
 			}
 			
 			return newTrackingStatus; 
