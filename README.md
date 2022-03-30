@@ -19,7 +19,7 @@
 
 + Para ver o repositório **front-end**, desenvolvido em React, clique [aqui](https://github.com/gustavopnunes/desafio-ilab-front).</br>
 
-### 👩🏽‍💻 Pessoas Desenvolvedoras
+### 👩🏽‍💻 Equipe responsável
 - [Bianca Andrade](https://github.com/biancaandradee)
 - [Gustavo Nunes](https://github.com/gustavopnunes)
 - [Jean Pierre Sisse](https://github.com/JeanSisse)
@@ -35,11 +35,6 @@ Tecnologias que utilizamos para desenvolver esta API Rest:
 - [Spring Security](https://spring.io/projects/spring-security)
 - [JWT](https://jwt.io/)
 - [Swagger](https://swagger.io/)
-
-## Links adicionais
-- [Documentação das rotas no HackMD]()
-- [Fluxograma do banco de dados]()
-- [Kanban da equipe]()
 
 ## 🏁 Iniciando o projeto
 
@@ -66,7 +61,7 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
 zspring.jpa.show_sql = true
 ```
 
-O script para criação do banco, bem como as queries para populá-lo, encontram-se...
+O script para criação do banco se encontra no arquivo **data.sql**.
 
 ### Tudo pronto!
 
@@ -81,16 +76,19 @@ https://desafio-ilab-back.herokuapp.com/
 ## ⚙️ Funcionalidades
 Funcionalidades que o sistema oferece:
 
-EXEMPLO A SEGUIR
-
-- Cadastro e Login de Usuários
-- Cadastro de Clientes e Especialistas
-- Cadastro de Atendimentos e de Históricos de Prontuários
-- Pesquisa
-	- Busca de atendimentos por Status, Paciente, Especialista, Data de agendamento ou de atendimento
-- Criação de Agendamentos
+- Endpoint para Autenticação de Pessoa Entregadora
+- Endpoint para Consulta de Pedidos por Status
+- Endpoint para Criação de Rastreio (Atribuição de Pessoa Entregadora para o Pedido)
+- Endpoint para Alteração do Status do Rastreio e do Pedido
+- Criação de Rastreio (atribuição de pedido a entregador)
+- Endpoint para Receber Geolocalização da Pessoa Entregadora
+- Endpoint para Consultas de Geolocalização por Rastreio
 - Criptografia de senhas
-- Sistema de autenticação de usuário
 - Validação de requisições
-- Mensagens de erro customizadas *user friendly*
+- Mensagens de erro customizadas
 - Documentação dos endpoints
+
+## 🔗 Links adicionais
+- [Documentação das rotas no HackMD](https://hackmd.io/@xl8qmYgnSKeiH6rfFoNXSQ/SkGsq8UGc)
+- [Fluxograma do banco de dados](https://drive.google.com/file/d/1STahipbU4bt0wiyP_wrGrMDDNsKsWCzJ/view?usp=sharing)
+- [Kanban da equipe](https://sharing.clickup.com/31041916/b/h/xkabw-103/afe7965c2387ca4)
