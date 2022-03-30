@@ -1,6 +1,7 @@
 package br.com.grupodois.desafioilab.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "orders")
@@ -31,19 +36,23 @@ public class Orders {
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
+	@JsonIgnoreProperties("ordersList")
 	private Client clientId;
 
-	public Orders() {
-		super();
-	}
+	@OneToMany(mappedBy = "dpId")
+	@JsonIgnore
+	private List<TrackingStatus> trackingStatusList;
+	
+	public Orders() {}
 
-	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Client clientId) {
+	public Orders(Long id, Timestamp orderDate, Double orderValue, String orderStatus, Long clientId) {
 		super();
 		this.id = id;
 		this.orderDate = orderDate;
 		this.orderValue = orderValue;
 		this.orderStatus = orderStatus;
-		this.clientId = clientId;
+		this.clientId = new Client();
+		this.clientId.setId(clientId);
 	}
 
 	public Long getId() {
@@ -84,6 +93,20 @@ public class Orders {
 
 	public void setClientId(Client clientId) {
 		this.clientId = clientId;
+	}
+
+	public List<TrackingStatus> getTrackingStatusList() {
+		return trackingStatusList;
+	}
+
+	public void setTrackingStatusList(List<TrackingStatus> trackingStatusList) {
+		this.trackingStatusList = trackingStatusList;
+	}
+
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", orderDate=" + orderDate + ", orderValue=" + orderValue + ", orderStatus="
+				+ orderStatus + ", clientId=" + clientId + ", trackingStatusList=" + trackingStatusList + "]";
 	}
 
 
