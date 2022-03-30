@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.grupodois.desafioilab.dto.OrdersDTO;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.service.IOrdersService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/orders")
-@Api(value = "Pedidos")
+//@Api(value = "Pedidos")
 public class OrdersController {
 
 	@Autowired
 	public IOrdersService service;
 
-	@ApiOperation(value = "Retorno dos Pedidos")
+//	@ApiOperation(value = "Retorno dos Pedidos")
 	@GetMapping
 	public ResponseEntity<List<Orders>> getAllOrdersByStatus(@RequestParam(name = "status") String status, @RequestParam(name = "items") int items) {
 		
@@ -64,7 +64,7 @@ public class OrdersController {
 				return ResponseEntity.status(201).body(order.toString());
 			}
 
-			return ResponseEntity.status(404).body("Dados inválidos.");
+			return ResponseEntity.status(400).body("Dados inválidos.");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());

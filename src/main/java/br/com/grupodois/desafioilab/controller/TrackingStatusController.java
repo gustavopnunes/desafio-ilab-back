@@ -19,13 +19,13 @@ import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
 import br.com.grupodois.desafioilab.service.IOrdersService;
 import br.com.grupodois.desafioilab.service.ITrackingStatusService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value = "tracking-status")
-@Api(value = "Rastreio")
+//@Api(value = "Rastreio")
 public class TrackingStatusController {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class TrackingStatusController {
 	@Autowired
 	public IOrdersService orderService;
 	
-	@ApiOperation(value = "Criação do Rastreio de um Produto")
+	//@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
 	public ResponseEntity<?> createTrackingStatus (@RequestBody RequestTrackingStatusDTO novo) {
 		try {
@@ -44,6 +44,7 @@ public class TrackingStatusController {
 		} catch(CustomException exception) {
 			exception.printStackTrace();
 			return ResponseEntity.status(exception.getStatusCode()).body(exception.getMessage());
+
 		} catch(Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(500).body(ex.getMessage());
@@ -51,17 +52,17 @@ public class TrackingStatusController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO statusString) {
+	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO status) {
 		try { 
-			TrackingStatusEnum status = TrackingStatusEnum.valueOf(statusString.getStatus());  
+			TrackingStatusEnum tsStatus = TrackingStatusEnum.valueOf(status.getStatus());  
 			
 			TrackingStatus ts = service.getTrackingStatusById(id);
-			ts.setStatus(status);
+			ts.setStatus(tsStatus);
 			service.updateTrackingStatus(ts);
 			
 			Orders order = ts.getOrder();
 
-			if (status.getCode() == 1) { 	
+			if (tsStatus.getCode() == 1) { 	
 				orderService.updateOrder(order, "DELIVERED");
 			} else { 
 				orderService.updateOrder(order, "OPEN");
