@@ -10,5 +10,6 @@ import br.com.grupodois.desafioilab.model.Orders;
 public interface OrdersDAO extends PagingAndSortingRepository<Orders, Number> {
     
   public List<Orders> findAllByOrderStatus(String status, Pageable p);
+  public Orders findById(Long id); 
 
 }
