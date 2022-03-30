@@ -2,17 +2,6 @@
   <img src="https://i.imgur.com/sAvv5kW.png" title="EntregaLover Logo" width="400" />
 </h1>
 
-<h3 align="center">
-  EntregaLovers App
-</h3>
-
-<p align="center">
-  <a href="#sobre o projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#iniciando">Iniciando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#funcionalidades">Funcionalidades</a>
-</p>
-
 ## Sobre o projeto
 
 <p style="color: red;">Nossa aplicação...</p>
