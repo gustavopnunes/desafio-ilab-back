@@ -18,8 +18,9 @@ public enum OrdersEnum {
 	
 	public static String fromString(String status) {
 		for (OrdersEnum o : OrdersEnum.values()) {
-			if (o.status.equalsIgnoreCase(status)){
-				return status;
+			
+			if (o.name().equals(status.toUpperCase())){
+				return o.getStatus();
 			}
 			 
 		}
