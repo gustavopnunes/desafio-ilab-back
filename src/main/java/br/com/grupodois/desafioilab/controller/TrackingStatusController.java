@@ -38,14 +38,6 @@ public class TrackingStatusController {
 	@PostMapping
 	public ResponseEntity<?> createTrackingStatus (@RequestBody RequestTrackingStatusDTO novo) {
 		try {
-			Long orderId = novo.getOrder().getId();
-			Orders order = orderService.getOrderById(orderId);
-			
-			if (order != null) {
-
-				return ResponseEntity.status(404).body("Pedido: "+ orderId + " não está disponível para entrega.");
-			}
-			return ResponseEntity.status(404).body("Produto: " + orderId + " não encontrado.");
 			TrackingStatus newTrackingStatus = service.createTrackingStatus(novo);
 			return ResponseEntity.status(201).body(ResponseTrackingStatusDTO.fromTrackingStatus(newTrackingStatus));
 					
