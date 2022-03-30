@@ -15,9 +15,9 @@
 
 ## Sobre o projeto
 
-- <p style="color: red;">A PomaLabs teve como desafio desenvolver um sistema para possibilitar o cadastro de clientes, atendimentos e prontuários dos pacientes de um consultório.</p>
+<p style="color: red;">Nossa aplicação...</p>
 
-Para ver o **Front-end**, clique aqui: [PomaLabs front-end](https://github.com/jhsmiranda/desafio-afya-front-end)</br>
++ Para ver o repositório **front-end**, desenvolvido em React, clique [aqui](https://github.com/gustavopnunes/desafio-ilab-front).</br>
 
 ### 👩🏽‍💻 Pessoas Desenvolvedoras
 - [Bianca Andrade](https://github.com/biancaandradee)
@@ -31,58 +31,58 @@ Para ver o **Front-end**, clique aqui: [PomaLabs front-end](https://github.com/j
 
 Tecnologias que utilizamos para desenvolver esta API Rest:
 
-- [Express.js](https://expressjs.com/pt-br/)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Security](https://spring.io/projects/spring-security)
 - [JWT](https://jwt.io/)
 - [Swagger](https://swagger.io/)
-- [Bcrypt](https://www.npmjs.com/package/bcrypt)
-- [Eslint](https://eslint.org/)
 
-## 🏁 Iniciando
+## Links adicionais
+- [Documentação das rotas no HackMD]()
+- [Fluxograma do banco de dados]()
+- [Kanban da equipe]()
 
-- As instruções a seguir irão te guiar para que você crie uma cópia do projeto na sua máquina local.
+## 🏁 Iniciando o projeto
 
-### Pré-requisitos
+Para criar uma cópia do projeto na sua máquina local, siga os passos abaixo.
 
-- Configure um banco de dados [PostgreSQL](https://www.postgresql.org/) na sua máquina e crie um novo banco.
+- Clone a API em sua máquina
+- Importe o projeto na IDE de sua preferência
+    - No Eclipse: File > Import > Existing Maven Projects
+- Inicie a API
+    - No Eclipse: 
+		- selecione o projeto no Package Explorer;
+		- clique em “Run” e escolha “Java Application”;
+		- selecione a aplicação e clique em “Finish”.
 
-**Clone o projeto e acesse a pasta**
+### Acesso ao banco de dados:
 
-```bash
-$ git clone https://github.com/fdutrac/desafio-afya-api/ && cd desafio-afya-api
-```
-
-**Siga as etapas abaixo**
-
-Edite o arquivo "env_example" com as configurações do seu banco de dados:
-
-```
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_HOST=seu_host
-DB_PORT=sua_port
-DB_NAME=nome_do_banco
-JWT_SECRET=seu_segredo
+A API está conectada ao nosso banco de dados já disponível no Heroku. Porém, caso queira criar seu próprio banco de dados e conectá-la a ele, basta alterar as configurações presentes em **src/main/resources/application.properties**. Não se esqueça de salvar as alterações.
 
 ```
-
-```bash
-# Instale as dependências
-$ yarn
-
-# Inicie o client
-$ yarn start
+spring.datasource.username = seu_usuario
+spring.datasource.password = sua_senha
+spring.datasource.url = jdbc:postgresql://link_do_seu_banco?useTimezone=true&serverTimezone=UTC
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+zspring.jpa.show_sql = true
 ```
 
-Tudo pronto! Agora, basta acessar a aplicação, disponível em:
-localhost:3000
+O script para criação do banco, bem como as queries para populá-lo, encontram-se...
 
-Documentação dos endpoints disponível na rota:
-localhost:3000/api-docs
+### Tudo pronto!
 
-Para acessar a API diretamente no seu browser, acesse https://clinica-pomarola-api.herokuapp.com/
+Agora, basta acessar a aplicação, disponível em: **localhost:8080**
+
++ Documentação dos endpoints disponível na rota:
+**localhost:8080/api-docs**
+
++ Para acessar a API diretamente no seu browser, acesse: 
+https://desafio-ilab-back.herokuapp.com/
 
 ## ⚙️ Funcionalidades
 Funcionalidades que o sistema oferece:
+
+EXEMPLO A SEGUIR
+
 - Cadastro e Login de Usuários
 - Cadastro de Clientes e Especialistas
 - Cadastro de Atendimentos e de Históricos de Prontuários
@@ -94,7 +94,3 @@ Funcionalidades que o sistema oferece:
 - Validação de requisições
 - Mensagens de erro customizadas *user friendly*
 - Documentação dos endpoints
-
-## 📄 Licença
-
-Este projeto está sob a licença de (PomaLabs).
