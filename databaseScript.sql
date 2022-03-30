@@ -3,8 +3,7 @@ DROP TABLE IF EXISTS client;
 CREATE TABLE client (
   id serial PRIMARY KEY,
   client_name varchar(100) NOT NULL,
-  client_cpf varchar(11) UNIQUE NOT NULL,
-  client_address text NOT NULL
+  client_cpf varchar(11) UNIQUE NOT NULL
 );
 
 DROP TABLE IF EXISTS orders;
