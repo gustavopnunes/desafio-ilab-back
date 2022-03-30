@@ -31,8 +31,11 @@ public class OrdersController {
 
 	@ApiOperation(value = "Retorno dos Pedidos")
 	@GetMapping
-	public ResponseEntity<List<Orders>> getAllOrdersByStatus(@RequestParam(name = "status") OrdersEnum status, @RequestParam(name = "items") int items) {
-    	List<Orders> response = service.getOrderByStatus(status.getStatus(), items);
+	public ResponseEntity<List<Orders>> getAllOrdersByStatus(@RequestParam(name = "status") String status, @RequestParam(name = "items") int items) {
+    
+		String returnedStatus = OrdersEnum.fromString(status);
+		
+		List<Orders> response = service.getOrderByStatus(returnedStatus, items);
     	if (response.size() != 0) {
     		return ResponseEntity.ok(response);
     	}
