@@ -6,7 +6,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
@@ -16,26 +15,19 @@ public class OrdersAPITests {
 	@Autowired
 	private MockMvc mockMvc;
 	
+
 //	@Test
-//	public void shouldReturnAllOrders() throws Exception{
-//		mockMvc.perform(MockMvcRequestBuilders.get("/orders"))
-//			   .andExpect(MockMvcResultMatchers.status().isOk())
-//			   //.andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-//			   .andDo(MockMvcResultHandlers.print());
-//	}
+//    public void shouldReturnOrdersList() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get("/orders?{status=DELIVERED}&{items=1}"))
+//               .andExpect(MockMvcResultMatchers.status().isOk())
+//               .andDo(MockMvcResultHandlers.print());
+//    }
 	
 	@Test
-    public void shouldReturnOrdersList() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/orders?status=OPEN&items=1"))
-               .andExpect(MockMvcResultMatchers.status().isOk())
-               .andDo(MockMvcResultHandlers.print());
-    }
-//	
-//	@Test
-//	public void shouldExistEndpoint() throws Exception {
-//		mockMvc.perform(MockMvcRequestBuilders.get("/orders/1"))
-//		       .andExpect(MockMvcResultMatchers.status().isOk());
-//	}
+	public void shouldExistEndpoint() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/orders/1"))
+		       .andExpect(MockMvcResultMatchers.status().isOk());
+	}
 	
 	@Test
 	public void shouldReturnValidOrder() throws Exception {
@@ -43,16 +35,13 @@ public class OrdersAPITests {
 		       .andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
-//	@Test
-//	public void shouldReturnNotFoundStatus() throws Exception {
-//		mockMvc.perform(MockMvcRequestBuilders.get("/usuarios/100"))
-//		       .andExpect(MockMvcResultMatchers.status().isNotFound());
-//	}
-//	
-//	@Test
-//	public void shouldReturnBadRequestStatus() throws Exception {
-//		mockMvc.perform(MockMvcRequestBuilders.get("/usuarios/-1"))
-//		       .andExpect(MockMvcResultMatchers.status().isBadRequest());
-//	}
+	@Test
+	public void shouldReturnNotFoundStatus() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/orders/100"))
+		       .andExpect(MockMvcResultMatchers.status().isNotFound());
+		mockMvc.perform(MockMvcRequestBuilders.get("/orders/-1"))
+	       .andExpect(MockMvcResultMatchers.status().isNotFound());
+	}
+
 
 }
