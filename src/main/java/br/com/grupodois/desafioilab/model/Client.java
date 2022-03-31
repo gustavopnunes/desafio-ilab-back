@@ -26,21 +26,17 @@ public class Client {
 	@Column(name = "client_cpf", length = 11, nullable = false, unique = true)
 	private String clientCpf;
 	
-	@Column(name = "client_address", columnDefinition = "TEXT", nullable = false)
-	private String clientAddress;
-	
 	@OneToMany(mappedBy = "clientId")
 	@JsonIgnoreProperties("clientId")
 	private List<Orders> ordersList;
 	
     public Client() {}
 
-	public Client(Long id, String clientName, String clientCpf, String clientAddress, List<Orders> ordersList) {
+	public Client(Long id, String clientName, String clientCpf, List<Orders> ordersList) {
 		super();
 		this.id = id;
 		this.clientName = clientName;
 		this.clientCpf = clientCpf;
-		this.clientAddress = clientAddress;
 		this.ordersList = ordersList;
 	}
 
@@ -66,14 +62,6 @@ public class Client {
 
 	public void setClientCpf(String clientCpf) {
 		this.clientCpf = clientCpf;
-	}
-
-	public String getClientAddress() {
-		return clientAddress;
-	}
-
-	public void setClientAddress(String clientAddress) {
-		this.clientAddress = clientAddress;
 	}
 
 	public List<Orders> getOrdersList() {

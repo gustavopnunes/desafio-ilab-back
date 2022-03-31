@@ -22,7 +22,7 @@ public class DeliveryPersonController {
 	@Autowired
 	DeliveryPersonDAO dao; 
 
-//	@ApiOperation(value = "Cadastro do Entregador")
+	//@ApiOperation(value = "Cadastro do Entregador")
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody DeliveryPerson newUser) throws Exception { 
 		try { 
