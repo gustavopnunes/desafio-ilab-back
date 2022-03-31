@@ -32,7 +32,7 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 						
 			DeliveryPerson dp = dpService.getDeliveryPersonById(trackingStatusDTO.getDpId());
 			if (dp == null) { 
-				throw new CustomException("Cliente de id " + trackingStatusDTO.getDpId() + " não encontrado.", 404);				
+				throw new CustomException("Entregador de id " + trackingStatusDTO.getDpId() + " não encontrado.", 404);				
 			}
 			
 			Orders order = orderService.getOrderById(trackingStatusDTO.getOrderId());

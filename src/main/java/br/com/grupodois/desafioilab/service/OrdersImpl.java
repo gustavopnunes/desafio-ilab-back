@@ -43,8 +43,7 @@ public class OrdersImpl implements IOrdersService {
 	@Override
 	public Orders updateOrder(Orders order, OrdersEnum status) {
 		try {
-			String stringStatus = OrdersEnum.fromString(status.getStatus());
-			order.setOrderStatus(stringStatus);
+			order.setOrderStatus(status.getStatus());
 			return ordersDao.save(order);
 		} catch(Exception ex) {
 			ex.printStackTrace();
