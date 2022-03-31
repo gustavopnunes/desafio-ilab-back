@@ -3,7 +3,6 @@ package br.com.grupodois.desafioilab.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,18 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.grupodois.desafioilab.dao.DeliveryPersonDAO;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.security.SystemCrypto;
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
-//@Api(value = "Entregador")
+@Api(value = "Entregador")
 public class DeliveryPersonController {
 	
 	@Autowired
 	DeliveryPersonDAO dao; 
 
-	//@ApiOperation(value = "Cadastro do Entregador")
+	@ApiOperation(value = "Cadastro do Entregador")
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody DeliveryPerson newUser) throws Exception { 
 		try { 
