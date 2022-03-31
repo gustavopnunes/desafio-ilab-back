@@ -1,6 +1,6 @@
 package br.com.grupodois.desafioilab.config;
 
-/*import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -37,5 +37,5 @@ public class SwaggerConfig {
 		}
 }
 
-*/
+
 
