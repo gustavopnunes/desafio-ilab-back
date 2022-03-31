@@ -14,9 +14,7 @@ import br.com.grupodois.desafioilab.dto.RequestTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.ResponseTrackingStatusDTO;
 import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
 import br.com.grupodois.desafioilab.exceptions.CustomException;
-import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
-import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
 import br.com.grupodois.desafioilab.service.IOrdersService;
 import br.com.grupodois.desafioilab.service.ITrackingStatusService;
 import io.swagger.annotations.Api;
@@ -53,24 +51,15 @@ public class TrackingStatusController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateTrackingStatus (@PathVariable Long id, @RequestBody TrackingStatusUpdateDTO status) {
-		try { 
-			TrackingStatusEnum tsStatus = TrackingStatusEnum.valueOf(status.getStatus());  
-			
-			TrackingStatus ts = service.getTrackingStatusById(id);
-			ts.setStatus(tsStatus);
-			service.updateTrackingStatus(ts);
-			
-			Orders order = ts.getOrder();
-
-			if (tsStatus.getCode() == 1) { 	
-				orderService.updateOrder(order, "DELIVERED");
-			} else { 
-				orderService.updateOrder(order, "OPEN");
-			}
-		
+		try {
+			service.updateTrackingStatus(status, id);
 			return ResponseEntity.status(200).body("Status atualizado com sucesso!");
+		} catch(CustomException ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(ex.getStatusCode()).body(ex.getMessage());
 		} catch(Exception e) { 
-			return ResponseEntity.status(400).body("Não foi possível atualizar o status do pedido.");
+			e.printStackTrace();
+			return ResponseEntity.status(500).body("Não foi possível atualizar o status do pedido.");
 		}
 	}
 }
