@@ -19,13 +19,13 @@ import br.com.grupodois.desafioilab.model.TrackingStatus;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
 import br.com.grupodois.desafioilab.service.IOrdersService;
 import br.com.grupodois.desafioilab.service.ITrackingStatusService;
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value = "tracking-status")
-//@Api(value = "Rastreio")
+@Api(value = "Rastreio")
 public class TrackingStatusController {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class TrackingStatusController {
 	@Autowired
 	public IOrdersService orderService;
 	
-	//@ApiOperation(value = "Criação do Rastreio de um Produto")
+	@ApiOperation(value = "Criação do Rastreio de um Produto")
 	@PostMapping
 	public ResponseEntity<?> createTrackingStatus (@RequestBody RequestTrackingStatusDTO novo) {
 		try {
