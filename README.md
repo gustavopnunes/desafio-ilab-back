@@ -4,7 +4,7 @@
 
 ## Sobre o projeto
 
-<p style="color: red;">Nossa aplicação...</p>
+<p>Nosso projeto consiste em uma aplicação para recuperação e armazenamento de dados de geolocalização em tempo real.</p>
 
 + Para ver o repositório **front-end**, desenvolvido em React, clique [aqui](https://github.com/gustavopnunes/desafio-ilab-front).</br>
 
@@ -65,13 +65,12 @@ https://desafio-ilab-back.herokuapp.com/
 ## ⚙️ Funcionalidades
 Funcionalidades que o sistema oferece:
 
-- Endpoint para Autenticação de Pessoa Entregadora
-- Endpoint para Consulta de Pedidos por Status
-- Endpoint para Criação de Rastreio (Atribuição de Pessoa Entregadora para o Pedido)
-- Endpoint para Alteração do Status do Rastreio e do Pedido
-- Criação de Rastreio (atribuição de pedido a entregador)
-- Endpoint para Receber Geolocalização da Pessoa Entregadora
-- Endpoint para Consultas de Geolocalização por Rastreio
+- Login de Pessoa Entregadora
+- Consulta de Pedidos por Status
+- Criação de Rastreio (Atribuição de Pessoa Entregadora para o Pedido)
+- Alteração do Status do Rastreio e do Pedido
+- Captura e Registro da Geolocalização da Pessoa Entregadora
+- Consultas de Geolocalização por Pedido
 - Criptografia de senhas
 - Validação de requisições
 - Mensagens de erro customizadas
