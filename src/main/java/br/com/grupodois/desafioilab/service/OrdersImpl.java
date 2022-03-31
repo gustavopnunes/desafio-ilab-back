@@ -13,6 +13,7 @@ import br.com.grupodois.desafioilab.dao.OrdersDAO;
 import br.com.grupodois.desafioilab.dto.OrdersDTO;
 import br.com.grupodois.desafioilab.model.Client;
 import br.com.grupodois.desafioilab.model.Orders;
+import br.com.grupodois.desafioilab.model.enums.OrdersEnum;
 
 @Component
 public class OrdersImpl implements IOrdersService {
@@ -40,9 +41,10 @@ public class OrdersImpl implements IOrdersService {
 	}
 
 	@Override
-	public Orders updateOrder(Orders order, String status) {
+	public Orders updateOrder(Orders order, OrdersEnum status) {
 		try {
-			order.setOrderStatus(status);
+			String stringStatus = OrdersEnum.fromString(status.getStatus());
+			order.setOrderStatus(stringStatus);
 			return ordersDao.save(order);
 		} catch(Exception ex) {
 			ex.printStackTrace();
