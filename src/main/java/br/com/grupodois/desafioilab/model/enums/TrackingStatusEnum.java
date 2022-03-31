@@ -6,7 +6,8 @@ public enum TrackingStatusEnum {
 	
 	
 	DELIVERED(1),
-	CANCELED(2);
+	CANCELED(2),
+	IN_PROGRESS(3);
 	
 	private int code;
 
