@@ -5,11 +5,13 @@ import org.springframework.stereotype.Component;
 
 import br.com.grupodois.desafioilab.dao.TrackingStatusDAO;
 import br.com.grupodois.desafioilab.dto.RequestTrackingStatusDTO;
+import br.com.grupodois.desafioilab.dto.TrackingStatusUpdateDTO;
+import br.com.grupodois.desafioilab.exceptions.CustomException;
 import br.com.grupodois.desafioilab.model.DeliveryPerson;
 import br.com.grupodois.desafioilab.model.Orders;
 import br.com.grupodois.desafioilab.model.TrackingStatus;
+import br.com.grupodois.desafioilab.model.enums.OrdersEnum;
 import br.com.grupodois.desafioilab.model.enums.TrackingStatusEnum;
-import br.com.grupodois.desafioilab.exceptions.CustomException;
 
 @Component
 public class TrackingStatusImpl implements ITrackingStatusService {
@@ -41,7 +43,8 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 			if (!order.getOrderStatus().toUpperCase().equals("OPEN")) {				
 				throw new CustomException("Pedido: "+ trackingStatusDTO.getOrderId() + " não está disponível para entrega.", 400);
 			}
-			order = orderService.updateOrder(order, "IN PROGRESS");
+			
+			order = orderService.updateOrder(order, OrdersEnum.IN_PROGRESS);
 			
 			TrackingStatusEnum status = TrackingStatusEnum.valueOf(trackingStatusDTO.getStatus());
 			ts.setStatus(status);
@@ -66,8 +69,28 @@ public class TrackingStatusImpl implements ITrackingStatusService {
 	}
 
 	@Override
-	public TrackingStatus updateTrackingStatus(TrackingStatus updatedTS) {
-		return dao.save(updatedTS);
+	public TrackingStatus updateTrackingStatus(TrackingStatusUpdateDTO updatedTS, Long id) {
+		try {
+			TrackingStatusEnum tsStatus = TrackingStatusEnum.valueOf(updatedTS.getStatus());
+			TrackingStatus ts = getTrackingStatusById(id);
+			
+			if (ts == null) {
+				throw new CustomException("Tracking Status de id " + id + " não encontrado.", 404);
+			}
+			
+			Orders order = ts.getOrder();
+			
+			if (tsStatus.getCode() == 1) { 	
+				orderService.updateOrder(order, OrdersEnum.DELIVERED);
+			} else { 
+				orderService.updateOrder(order, OrdersEnum.OPEN);
+			}
+			
+			ts.setStatus(tsStatus);
+			return dao.save(ts);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 
