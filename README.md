@@ -6,7 +6,7 @@
 
 <p>Nosso projeto consiste em uma aplicação para recuperação e armazenamento de dados de geolocalização em tempo real.</p>
 
-+ Para ver o repositório **front-end**, desenvolvido em React, clique [aqui](https://github.com/gustavopnunes/desafio-ilab-front).</br>
++ Para ver o repositório **front-end**, desenvolvido em React, clique [aqui](https://github.com/gustavopnunes/desafio-ilab-front).
 
 ### 👩🏽‍💻 Equipe responsável
 - [Bianca Andrade](https://github.com/biancaandradee)
@@ -40,7 +40,7 @@ Para criar uma cópia do projeto na sua máquina local, siga os passos abaixo.
 
 ### Acesso ao banco de dados:
 
-A API está conectada ao nosso banco de dados já disponível no Heroku. Porém, caso queira criar seu próprio banco de dados e conectá-la a ele, basta alterar as configurações presentes em **src/main/resources/application.properties**. Não se esqueça de salvar as alterações.
+Primeiro, crie seu banco de dados Postgresql fazendo uso do script que se encontra no arquivo **data.sql**. Então, para conectar a API a ele, altere as configurações presentes em **src/main/resources/application.properties**. Não se esqueça de salvar as alterações.
 
 ```
 spring.datasource.username = seu_usuario
@@ -50,16 +50,14 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
 zspring.jpa.show_sql = true
 ```
 
-O script para criação do banco se encontra no arquivo **data.sql**.
-
 ### Tudo pronto!
 
 Agora, basta acessar a aplicação, disponível em: **localhost:8080**
 
 + Documentação dos endpoints disponível na rota:
-**localhost:8080/api-docs**
+**localhost:8080/swagger-ui.html**
 
-+ Para acessar a API diretamente no seu browser, acesse: 
++ Para verificar a API hospedada no Heroku, acesse: 
 https://desafio-ilab-back.herokuapp.com/
 
 ## ⚙️ Funcionalidades
@@ -77,6 +75,6 @@ Funcionalidades que o sistema oferece:
 - Documentação dos endpoints
 
 ## 🔗 Links adicionais
-- [Documentação das rotas no HackMD](https://hackmd.io/@xl8qmYgnSKeiH6rfFoNXSQ/SkGsq8UGc)
-- [Fluxograma do banco de dados](https://drive.google.com/file/d/1STahipbU4bt0wiyP_wrGrMDDNsKsWCzJ/view?usp=sharing)
+- [Swagger](https://desafio-ilab-back.herokuapp.com/swagger-ui.html)
+- [Fluxograma do banco de dados](https://drive.google.com/file/d/1B2aILJyphdKjPzKv8SEL5_3cfmk_E1XD/view?usp=sharing)
 - [Kanban da equipe](https://sharing.clickup.com/31041916/b/h/xkabw-103/afe7965c2387ca4)
