@@ -25,7 +25,6 @@ public class SystemSecurityConfiguration extends WebSecurityConfigurerAdapter {
 					  .antMatchers(HttpMethod.POST, "/register").permitAll()
 					  .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
 					  .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-					  //.anyRequest().permitAll(); //Tirar isso aqui no final!
 					  .anyRequest().authenticated().and().cors();
 		
 			httpSec.addFilterBefore(new SystemAuthFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -40,7 +39,7 @@ public class SystemSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		            "/swagger-resources/**",  
 		            "/swagger-ui.html", 
 		            "/webjars/**" ,
-		             /*Probably not needed*/ "/swagger.json");
+		            "/swagger.json");
 	}
 
 }
